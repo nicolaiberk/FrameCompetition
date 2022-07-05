@@ -120,10 +120,15 @@ To be clear, I do not suggest that the salience of issues does not matter. Exist
 How could changing issue content be described in a theoretical model? The next section introduces the concept of emphasis framing and the value-expectancy model of preference formation. This theoretical framework allows me to formulate clear expectations about the impact of changing issue content on voting behaviour, as well as clarify the concepts to be operationalised.
 
 
-
 ## The Value-Expenctancy Framework and Emphasis Framing
 
-<!-- <explain Ajzen-Fishbein model> -->
+What aspect of news content affect political preferences? Specifically, how can different considerations about the same issue affect one's reasoning and preferences regarding that issue? The large and established literature on framing has tackled precisely this question. To be clear, when I speak of "framing" in this manuscript, I refer to *emphasis framing*.  Compared to concepts like equivalence frames (outlining different formulations of mathematically identical options; @Kahnemann1970), generic frames (portraying complex issues, e.g. elections within common and simplified metaphors, e.g. as a horse race; @DeVreese2005), or episodic frames (portraying issues through individual, personal stories; @Iyengar2005), emphasis framing focuses on the *emphasis* of different *considerations* surrounding an issue. For example, discussing the issue of migration, the debate can focus on the brutal reality of refugees' lifes and the hardships they face on their escape; or the discourse might focus on fears of the population in host countries and potential problems in the accommodation of refugees. The emphasis of different considerations will create different mental images which lead to differing assessments of the problem at hand, different preferences about the issue, and a different set of potential policy solutions.
+
+More formally, this logic is expressed in the *value-expectancy framework* of attitude formation [@Ajzen2000; @Nelson1997]. An attitude towards a political issue is a function of two things in this model: first, different considerations contain a certain positive or negative evaluation of the issue (let's call this $e_i$). For example, thinking of how to deal with criminal refugees will entail a more restrictive assessment towards immigration policy (simplistically $e_1 = -1$), whereas reasoning about how to prevent the humanitarian tragedies in the Mediterranean sea should be associated with a more welcoming position ($e_2 = 1$). All available considerations are then weighted by the *strength of the association* with the issue. That is, if an individual associates the issue of migration more strongly with criminal migrants rather than drownings in the Mediterranean sea, they weigh the former consideration more strongly ($w_1 = 0.9$) than the second ($w_2 = 0.1$) to form their overall opinion on the issue. The overall attitude $y$ is then a weighted sum of each consideration ($\sum_{i = 1}{e_i*w_i}$), or in this case $-1*0.9 + 1*0.1 = -0.8$. Given the stronger weighting of the consideration of criminal migrants by the respondent, the overall formed attitude is a negative/restrictive one.
+
+## Emphasis Framing, the Media, and Party Competition
+
+How does the media play into this? And how does this translate in to voting behaviour?
 
 
 *Frame Competition Hypothesis: The more similar an issue's framing to a given parties' issue framing, the better that parties' electoral prospect.*
