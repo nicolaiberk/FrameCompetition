@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.12)  5 JUL 2022 10:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.12)  5 JUL 2022 11:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -571,7 +571,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [7]
-<Manuscript_files/figure-latex/afdmigration-1.pdf, id=82, 469.755pt x 325.215pt>
+<Manuscript_files/figure-latex/afdmigration-1.pdf, id=86, 469.755pt x 325.215pt>
 File: Manuscript_files/figure-latex/afdmigration-1.pdf Graphic file (type pdf)
 <use Manuscript_files/figure-latex/afdmigration-1.pdf>
 Package pdftex.def Info: Manuscript_files/figure-latex/afdmigration-1.pdf  used on input line 418.
@@ -592,7 +592,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [9 <./Manuscript_files/figure-latex/afdmigration-1.pdf>]
-Overfull \hbox (1.13518pt too wide) in paragraph at lines 437--437
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 431.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 431.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 431.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10]
+Overfull \hbox (1.13518pt too wide) in paragraph at lines 446--446
 []\T1/lmr/bx/n/14.4 The Mi-gra-tion Is-sue in the Ger-man Bun-destagswahl
  []
 
@@ -603,13 +617,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[10]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 461.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 461.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 461.
+[11]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -617,26 +625,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[11] (./Manuscript.aux)
+[12] (./Manuscript.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Manuscript.out' has not changed.
-(rerunfilecheck)             Checksum: F0C4B30EBC26A50284407EECFCAC1BF5;2124.
+(rerunfilecheck)             Checksum: 724575778EA04F674C1275C8D8C4D544;2450.
  ) 
 Here is how much of TeX's memory you used:
- 11971 strings out of 480000
- 188298 string characters out of 5886844
- 487784 words of memory out of 5000000
- 29914 multiletter control sequences out of 15000+600000
+ 11979 strings out of 480000
+ 188477 string characters out of 5886844
+ 487865 words of memory out of 5000000
+ 29916 multiletter control sequences out of 15000+600000
  526396 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,12n,77p,1269b,588s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Manuscript.pdf (11 pages, 279545 bytes).
+ 72i,12n,77p,1407b,588s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/nicol/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on Manuscript.pdf (12 pages, 323091 bytes).
 PDF statistics:
- 180 PDF objects out of 1000 (max. 8388607)
- 144 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 78 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 229 PDF objects out of 1000 (max. 8388607)
+ 181 compressed objects within 2 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 
