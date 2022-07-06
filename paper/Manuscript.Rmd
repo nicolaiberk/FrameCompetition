@@ -188,26 +188,28 @@ The topic model then returns a topic vector for each news article, representing 
 
 In order to avoid making assumptions about the favorability of different considerations for different parties, I exploit this embedding-like structure of topic vectors to assess their similarity to party communication. The assumption I make instead is that party positions on migration are stable across the campaign, and that parties emphasize considerations supporting their position on the issue of migration. To measure the emphasis of different considerations in party communication, I select all paragraphs from parties' election manifestos in the 2017 election that are concerned with migration. For each party, I generate a topic vector using the model described in section, based on the collection of all relevant paragraphs \@ref(measuring-migration-framing-in-the-media).
 
-Now, using these party-framing vectors, *I can assess the similarity of each news article towards each party's migration framing, simply by taking the cosine distance to the party's vector*. Figure \@ref(fig:vectors) gives an example: the article vector (representing the distribution of different topics within the article) is clearly closer to the vector of party a (representing the distribution of topics in party a's communication), compared to party b.
+Now, using these party-framing vectors, *I can assess the similarity of each news article towards each party's migration framing, simply by taking the cosine distance to the party's vector*. Figure \@ref(fig:vectors) gives a two-dimensional example: the article vector (representing the distribution of different considerations within the article) is clearly closer to the vector of party a (representing the distribution of considerations in party a's communication), compared to party b.
 
 With this approach, it is possible to track the similarity of the media framing of migration to each party, in order to test the frame competition hypothesis: whether parties perform better when the media framing of migration is more similar to their own framing. This could well be done with document embeddings as well, however topic vectors offer a key advantage here: other than the dimensions of a, say, 300-dimensional embedding model, the dimensions of topic-vectors are interpretable. This can serve as a sanity check (e.g. if increased attention to crime results in higher similarity to a left-wing party that supports extended immigration, this would suggest that the model is not great), as well as enrich the data analysis: if frame similarity has an effect on parties' electoral prospects, it is easy to see which topics drive this effect and how the media debate affected opinion polls.
 
 ```{r vectors}
 
-library(plotly)
-
-item <- c("article", "Party A", "Party B",
-          "article", "Party A", "Party B")
-dim1 <- c(0,  0.2, 0.8,
-          0,0,0)
-dim2 <- c(.8, 0.8, 0.2,
-          0,0,0)
-dim3 <- c(.5, 0.8, 0.8,
-          0,0,0)
-  
-plot_ly(x = dim1, y = dim2, z = dim3, 
-        color = item, linetype = item,
-        type = "scatter3d", mode = "lines")
+data.frame(
+  item = c("article", "Party A", "Party B",
+            "article", "Party A", "Party B"),
+  dim1 = c(0,  0.2, 0.8,
+            0,0,0),
+  dim2 = c(1, 0.8, 0.2,
+            0,0,0)
+) %>% 
+ggplot(aes(x = dim1, y = dim2, 
+        color = item, linetype = item)) +
+  geom_line() +
+  geom_point(alpha = 0.3) + 
+  theme_minimal() +
+  xlab("Attention to Consideration 1") +
+  ylab("Attention to Consideration 2") +
+  theme(legend.title = element_blank())
 
 ```
 
