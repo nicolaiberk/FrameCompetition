@@ -221,6 +221,6 @@ As the above approach will provide me with time-series data on the similarity of
 
 ## Instrumenting Frame Attention
 
-An additional possibility in order to improve causal identification was to use exogenous events like the new years eve in cologne, terrorist attacks abroad or drownings in the Mediterranean sea to instrument attention to specific topics. This idea has not far progressed, so I am curious about your thoughts on this.
+An additional possibility in order to improve causal identification was to use exogenous events like the new years eve in cologne, terrorist attacks abroad or drownings in the Mediterranean sea to instrument attention to specific topics. The idea would be that these must be events that cannot be affected by polls (so e.g. radical-right attacks would not work, although this could be established by correlating lagged coverage with attacks) and vice versa do not affect polls through any other mechanism but media attention. This idea has not far progressed, so I am curious about your thoughts on this.
 
 # Resources
