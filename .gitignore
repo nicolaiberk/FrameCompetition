@@ -55,4 +55,5 @@ data
 lit
 paper/Manuscript*
 !paper/Manuscript.pdf
+!paper/Manuscript_files
 !paper/Manuscript.Rmd

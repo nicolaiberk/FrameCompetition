@@ -17,7 +17,7 @@ bibliography: C:/Users/nicol/Dropbox/Studium/BibTex/PhD.bib
 
 ```{r setup, include = F}
 
-knitr::opts_chunk$set(echo = F, message = F, warning = F, cache = F, fig.height=6, fig.width=10, fig.align='center', eval = T)
+knitr::opts_chunk$set(echo = F, message = F, warning = F, cache = T, fig.height=6, fig.width=10, fig.align='center', eval = T)
 
 
 library(tidyverse)
