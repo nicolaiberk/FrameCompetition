@@ -81,7 +81,7 @@ for (filename in list.files(here("code/functions"))){
 ```
 
 
-```{r vectors, fig.cap="Schematic representation of topic vectors for party communication and news articles."}
+```{r vectors, fig.cap="Schematic representation of topic vectors for party communication and news articles.", fig.width=6, fig.height=4}
 
 data.frame(
   item = c("News Article", "Party A", "Party B",
