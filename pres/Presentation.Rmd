@@ -22,10 +22,10 @@ output:
 library(xaringanthemer)
 style_mono_accent(
   base_color = "#004A95", background_color = "#bfbfbf",
-  base_font_size = "32px",
+  base_font_size = "40px",
   header_h1_font_size = "1.3rem",
   header_h2_font_size = "1.2rem",
-  header_h3_font_size = "1.05rem",
+  header_h3_font_size = "1rem",
   footnote_font_size = "0.75rem",
   header_font_google = google_font("Lato", '700'),
   text_font_google   = google_font("Lato", "400"),
@@ -81,7 +81,78 @@ for (filename in list.files(here("code/functions"))){
 ```
 
 
-```{r vectors, fig.cap="Schematic representation of topic vectors for party communication and news articles.", fig.width=6, fig.height=4}
+class: inverse, center, middle
+
+# Frame Competition
+
+#### Nicolai Berk<sup>*</sup>
+
+Presentation prepared for the first OX|BER Graduate Workshop
+
+Berlin, 14th of July
+
+
+.left[.footnote[<sup>*</sup> Dynamics RTG & Humboldt Universität Berlin]]
+
+
+---
+
+
+## Motivation: Issue Ownership
+
+```{r MPAtt}
+
+fread("https://www.dropbox.com/s/3taauo34rumthtm/final_dataset.csv?dl=1") %>% 
+  mutate(date = as.Date(date, format = "%d/%m/%Y"),
+         month = lubridate::floor_date(date, "quarter")) %>% 
+  filter(date >= as.Date("2013-01-01")) %>% 
+  group_by(month, sender) %>% 
+  summarise(imm_att = mean(coding)) %>% 
+  ggplot(aes(month, imm_att, fill = sender)) +
+  geom_col(position = "dodge2") + 
+  theme_minimal() +
+  ggtitle("Attention to migration in mainstream parties' press releases", "2013-2019") +
+  scale_fill_manual(values = c("#000000", "#e3000f")) +
+  theme_xaringan() +
+  ylab("") + xlab("")
+
+```
+
+---
+
+## Motivation II
+
+- Parties only option to **remain mute** on other parties' issues?
+- Framing literature suggests that issue definitions affect voters' policy preferences.
+- Some experimental literature that this can affect issue ownership [@Seeberg2019].
+
+--
+
+### But can framing affect voting behaviour?
+
+---
+
+## Argument
+
+1. Issue framing affects issue preferences.
+2. Dominant framing of an issue changes public opinion on that issue.
+3. Public votes based on proximity to parties' issue positions.
+
+### Issues more or less beneficial dependent on *dominant framing*!
+
+---
+
+class: center, inverse, middle
+
+# Research Design
+
+---
+
+--- 
+
+## Measuring Frame Dominance
+
+```{r vectors}
 
 data.frame(
   item = c("News Article", "Party A", "Party B",
@@ -93,11 +164,14 @@ data.frame(
 ) %>% 
 ggplot(aes(x = dim1, y = dim2, 
         color = item, linetype = item)) +
-  geom_line() +
-  geom_point(alpha = 0.3) + 
+  geom_line(size = 2) +
+  geom_point(alpha = 0.3, size = 4) + 
   theme_minimal() +
   xlab("Attention to Consideration 1") +
   ylab("Attention to Consideration 2") +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank()) +
+  theme_xaringan()
 
 ```
+
+
