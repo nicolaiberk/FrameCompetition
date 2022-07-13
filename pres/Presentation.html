@@ -4,8 +4,12 @@
     <title>Frame Competition</title>
     <meta charset="utf-8" />
     <meta name="author" content="Nicolai Berk" />
-    <meta name="date" content="2022-07-12" />
+    <meta name="date" content="2022-07-13" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="libs/viz-1.8.2/viz.js"></script>
+    <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="libs/grViz-binding-1.0.9/grViz.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -36,46 +40,218 @@ Berlin, 14th of July
 ---
 
 
-## Motivation: Issue Ownership
+## Issue Ownership Theory
+
+
+&lt;img src="Presentation_files/figure-html/IssueOwnership-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Parties behave accordingly
 
 &lt;img src="Presentation_files/figure-html/MPAtt-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Motivation II
+## Research Question
 
-- Is parties only option to remain **mute** on other parties' issues?
-- Framing literature suggests that issue definitions affect voters'policy preferences.
-- Some experimental literature that this can affect [@Seeberg2019].
+- Parties only option to **remain mute** on other parties' issues?
+- Framing literature suggests that issue definitions affect voters' policy preferences.
+- Experimental work shows that framing can affect issue ownership (Seeberg 2019).
 
 --
 
-### But can framing affect voting behaviour?
+### Does framing affect voting behaviour?
 
 ---
+
+class: inverse
 
 ## Argument
 
-1. Issue framing affects issue preferences.
-2. Dominant framing of an issue changes public opinion on that issue.
-3. Public votes based on proximity to parties' issue positions.
+&lt;br&gt;
 
-### Issues more or less beneficial dependent on *dominant framing*!
+### 1. Issue framing affects issue attitudes.
+### 2. Dominant media framing changes public opinion.
+### 3. Policy preferences translate into voting behaviour.
+
+
+--
+
+## Media Framing `\(\rightarrow\)` Voting Behaviour
+
 
 ---
 
-## Measuring Consideration Attention
+
+## Research Design
+
+&lt;br&gt;
+
+### 1. Measure similarity of media framing to party framing.
+### 2. Estimate effect of similarity on electoral performance.
+
+---
+
+## Data
+
+### Media Content
+
+Collected **2.5M news articles** from major German newspapers' websites (2013-2019).
+
+.pull-left[
+
+### (Expected) Electoral Performance
+
+]
+
+.pull-right[ 
+  
+  ![](https://www.politico.eu/wp-content/uploads/2022/02/01/Poll-of-Polls.svg)
+  
+]
+
+  
+- Polling data collected by *Politico's [Poll of Polls](https://www.politico.eu/europe-poll-of-polls/)*.
+- Generates daily moving average of party support.
+
+---
+
+## Data II
+
+&lt;br&gt;
+
+### Party framing
+
+- 2017 Manifesto corpora, reduced to migration content.
+- Ideal because **summarise general position** on the issue.
+- Downside: assumption of stable position over time.
+
+---
+
+## Measuring Issue Framing
+
+.pull-left[
+
+  ![](vis/CognitiveStorage.png)
+  
+]
+
+.pull-right[
+
+1. Identify media content relating to issue:
+  - Annotate sample
+  - Supervised ML (BERT)
+2. Identify considerations:
+  -  Topic model
+
+]
+
+
+---
+
+## Measuring Frame Similarity
 
 &lt;img src="Presentation_files/figure-html/vectors-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
 
+---
 
+## Measuring Frame Similarity
+
+### Why frame *similarity*?
+
+- Parties communicate a certain framing either as cause or outcome of their positions.
+- If media framing is **similar**, this supports a parties' position.
+- As a result, citizens are more likely to vote for party.
+
+--
+
+### Measurement
+
+`$$Similarity_{t,p} = cos(TopicVector_{Articles_{t}}, TopicVector_p)$$`
+
+---
+
+## SVAR Time Series Model
+
+- VAR allows modeling multiple time series.
+- Structural VAR allows modeling interaction `\(Performance = Salience*Similarity\)`.
+- Estimate of interest: effect of similarity on electoral performance.
+
+---
+
+## Instrumental Variable Approach
+
+.left-column[
+
+
+<div id="htmlwidget-56b4d25a74a2bad0e411" style="width:90%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-56b4d25a74a2bad0e411">{"x":{"diagram":"\ndigraph boxes_and_circles {\n  \n  rankdir = \"TB\"\n  bgcolor = \"#bfbfbf\"\n  \n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 16]\n\n  # several \"node\" statements\n  node [shape = plaintext,\n        fontname = Verdana,\n        fontcolor = black]\n  Z [label = \"Events\", fontcolor = \"#004A95\"]\n  X [label = \"Media Framing\"]\n  Y [label = \"Voting\"]\n\n  \n  # several \"edge\" statements\n  Z->X [color = \"#004A95\"]\n  X->Y [color = black]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+]
+
+.right-column[
+
+Events drive media attention to considerations, e.g.
+
+- Migrant crime,
+- Terrorist Attacks,
+- Drownings.
+
+### These should only affect public opinion through media coverage.
+
+]
+
+---
+
+## Instrumental Variable Approach II
+
+&lt;br&gt;
+
+- Framing can be instrumented using exogenous events.
+- Predicted frame attention can then be used to estimate causal effect (**2SLS**).
+
+---
+
+## Summary
+
+&lt;br&gt;
+
+- **Goal**: Project tries to challenge assumption that issues always affect voters similarly.
+- **Argument**: dominant media framing of issues affects party support.
+- **Methods**: 
+  + innovative measure of frame similarity,
+  + combination of time-series and causal inference tools (SVAR + IV).
+  
+---
+
+## Open Questions
+
+- Does theory make sense?
+- Time Frame (2017 campaign or longer?)
+- Manifestos for party frames?
+- Additional Experiment?
+- ...?
+
+---
+
+class: inverse, middle, center
+
+# Fin
+
+## Thank you!
+
+.pull-left[![](vis/banner_new.png)]
+
+.pull-right[![](vis/dfg_logo_englisch_blau_en.jpg)]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": true,
+"countIncrementalSlides": false,
 "ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {

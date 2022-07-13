@@ -12,7 +12,7 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: true
+      countIncrementalSlides: false
       ratio: 16:9
     includes:
       after_body: insert-logo.html
@@ -98,7 +98,28 @@ Berlin, 14th of July
 ---
 
 
-## Motivation: Issue Ownership
+## Issue Ownership Theory
+
+
+```{r IssueOwnership}
+
+data.frame(
+  Party = c("A", "A", "B", "B"),
+  Issue = c("A's", "B's", "A's", "B's"),
+  Votes = c(0.3, 0.1, 0.1, 0.3)
+) %>% 
+  ggplot(aes(Issue, Votes, col = Party)) +
+  geom_point(size = 4) +
+  geom_line(aes(group = Party), size = 2) +
+  theme_xaringan() +
+  xlab("Salient Issue")
+
+```
+
+
+---
+
+## Parties behave accordingly
 
 ```{r MPAtt}
 
@@ -120,39 +141,106 @@ fread("https://www.dropbox.com/s/3taauo34rumthtm/final_dataset.csv?dl=1") %>%
 
 ---
 
-## Motivation II
+## Research Question
 
 - Parties only option to **remain mute** on other parties' issues?
 - Framing literature suggests that issue definitions affect voters' policy preferences.
-- Some experimental literature that this can affect issue ownership [@Seeberg2019].
+- Experimental work shows that framing can affect issue ownership (Seeberg 2019).
 
 --
 
-### But can framing affect voting behaviour?
+### Does framing affect voting behaviour?
 
 ---
+
+class: inverse
 
 ## Argument
 
-1. Issue framing affects issue preferences.
-2. Dominant framing of an issue changes public opinion on that issue.
-3. Public votes based on proximity to parties' issue positions.
+<br>
 
-### Issues more or less beneficial dependent on *dominant framing*!
+### 1. Issue framing affects issue attitudes.
+### 2. Dominant media framing changes public opinion.
+### 3. Policy preferences translate into voting behaviour.
+
+
+--
+
+## Media Framing $\rightarrow$ Voting Behaviour
+
 
 ---
 
-class: center, inverse, middle
 
-# Research Design
+## Research Design
+
+<br>
+
+### 1. Measure similarity of media framing to party framing.
+### 2. Estimate effect of similarity on electoral performance.
 
 ---
 
---- 
+## Data
 
-## Measuring Frame Dominance
+### Media Content
 
-```{r vectors}
+Collected **2.5M news articles** from major German newspapers' websites (2013-2019).
+
+.pull-left[
+
+### (Expected) Electoral Performance
+
+]
+
+.pull-right[ 
+  
+  ![](https://www.politico.eu/wp-content/uploads/2022/02/01/Poll-of-Polls.svg)
+  
+]
+
+  
+- Polling data collected by *Politico's [Poll of Polls](https://www.politico.eu/europe-poll-of-polls/)*.
+- Generates daily moving average of party support.
+
+---
+
+## Data II
+
+<br>
+
+### Party framing
+
+- 2017 Manifesto corpora, reduced to migration content.
+- Ideal because **summarise general position** on the issue.
+- Downside: assumption of stable position over time.
+
+---
+
+## Measuring Issue Framing
+
+.pull-left[
+
+  ![](vis/CognitiveStorage.png)
+  
+]
+
+.pull-right[
+
+1. Identify media content relating to issue:
+  - Annotate sample
+  - Supervised ML (BERT)
+2. Identify considerations:
+  -  Topic model
+
+]
+
+
+---
+
+## Measuring Frame Similarity
+
+```{r vectors, fig.height=7, cache=FALSE}
 
 data.frame(
   item = c("News Article", "Party A", "Party B",
@@ -174,4 +262,122 @@ ggplot(aes(x = dim1, y = dim2,
 
 ```
 
+---
 
+## Measuring Frame Similarity
+
+### Why frame *similarity*?
+
+- Parties communicate a certain framing either as cause or outcome of their positions.
+- If media framing is **similar**, this supports a parties' position.
+- As a result, citizens are more likely to vote for party.
+
+--
+
+### Measurement
+
+$$Similarity_{Party, t} = cos(TopicVector_{Media}, TopicVector_{Party})_t$$
+
+---
+
+## SVAR Time Series Model
+
+<br>
+
+- VAR allows modeling multiple time series as functions of own and other variables past.
+- Structural VAR allows modeling interaction $Performance = Salience*Similarity$.
+- Estimate of interest: effect of similarity on electoral performance.
+
+---
+
+## Instrumental Variable Approach
+
+.left-column[
+
+
+```{r dagInstrument, fig.align='center'}
+DiagrammeR::grViz("
+digraph boxes_and_circles {
+  
+  rankdir = 'TB'
+  bgcolor = '#bfbfbf'
+  
+  # a 'graph' statement
+  graph [overlap = true, 
+          fontsize = 16]
+
+  # several 'node' statements
+  node [shape = plaintext,
+        fontname = Verdana,
+        fontcolor = black]
+  Z [label = 'Events', fontcolor = '#004A95']
+  X [label = 'Media Framing']
+  Y [label = 'Voting']
+
+  
+  # several 'edge' statements
+  Z->X [color = '#004A95']
+  X->Y [color = black]
+}
+")
+
+
+```
+
+]
+
+.right-column[
+
+Events drive media attention to considerations, e.g.
+
+- Migrant crime,
+- Terrorist Attacks,
+- Drownings.
+
+### These should only affect public opinion through media coverage.
+
+]
+
+---
+
+## Instrumental Variable Approach II
+
+<br>
+
+- Framing can be instrumented using exogenous events.
+- Predicted frame attention can then be used to estimate causal effect (**2SLS**).
+
+---
+
+## Summary
+
+<br>
+
+- **Goal**: Project tries to challenge assumption that issues always affect voters similarly.
+- **Argument**: dominant media framing of issues affects party support.
+- **Methods**: 
+  + innovative measure of frame similarity,
+  + combination of time-series and causal inference tools (SVAR + IV).
+  
+---
+
+## Open Questions
+
+- Does theory make sense?
+- Time Frame (2017 campaign or longer?)
+- Manifestos for party frames?
+- SVAR correct model? (might go for unidirectional model with 2SLS)
+- Additional Experiment?
+- ...?
+
+---
+
+class: inverse, middle, center
+
+# Fin
+
+## Thank you!
+
+.pull-left[![](vis/banner_new.png)]
+
+.pull-right[![](vis/dfg_logo_englisch_blau_en.jpg)]
