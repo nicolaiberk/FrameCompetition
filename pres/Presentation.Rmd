@@ -12,7 +12,7 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: false
+      countIncrementalSlides: true
       ratio: 16:9
     includes:
       after_body: insert-logo.html
@@ -54,7 +54,7 @@ knitr::opts_chunk$set(
   echo = FALSE, 
   message = F, 
   warning = F, 
-  cache = T, 
+  cache = F, 
   out.width="90%", 
   fig.height=8, 
   fig.width=15, 
@@ -157,12 +157,12 @@ class: inverse
 
 ## Argument
 
-<br>
 
 ### 1. Issue framing affects issue attitudes.
 ### 2. Dominant media framing changes public opinion.
 ### 3. Policy preferences translate into voting behaviour.
 
+<br>
 
 --
 
@@ -276,7 +276,7 @@ ggplot(aes(x = dim1, y = dim2,
 
 ### Measurement
 
-$$Similarity_{Party, t} = cos(TopicVector_{Media}, TopicVector_{Party})_t$$
+$$Similarity_{p, t} = cos(TopicVector_{Media}, TopicVector_{p})_t$$
 
 ---
 
@@ -351,7 +351,6 @@ Events drive media attention to considerations, e.g.
 
 ## Summary
 
-<br>
 
 - **Goal**: Project tries to challenge assumption that issues always affect voters similarly.
 - **Argument**: dominant media framing of issues affects party support.

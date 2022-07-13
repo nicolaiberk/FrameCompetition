@@ -70,12 +70,12 @@ class: inverse
 
 ## Argument
 
-&lt;br&gt;
 
 ### 1. Issue framing affects issue attitudes.
 ### 2. Dominant media framing changes public opinion.
 ### 3. Policy preferences translate into voting behaviour.
 
+&lt;br&gt;
 
 --
 
@@ -169,13 +169,15 @@ Collected **2.5M news articles** from major German newspapers' websites (2013-20
 
 ### Measurement
 
-`$$Similarity_{t,p} = cos(TopicVector_{Articles_{t}}, TopicVector_p)$$`
+`$$Similarity_{p, t} = cos(TopicVector_{Media}, TopicVector_{p})_t$$`
 
 ---
 
 ## SVAR Time Series Model
 
-- VAR allows modeling multiple time series.
+&lt;br&gt;
+
+- VAR allows modeling multiple time series as functions of own and other variables past.
 - Structural VAR allows modeling interaction `\(Performance = Salience*Similarity\)`.
 - Estimate of interest: effect of similarity on electoral performance.
 
@@ -186,8 +188,8 @@ Collected **2.5M news articles** from major German newspapers' websites (2013-20
 .left-column[
 
 
-<div id="htmlwidget-56b4d25a74a2bad0e411" style="width:90%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-56b4d25a74a2bad0e411">{"x":{"diagram":"\ndigraph boxes_and_circles {\n  \n  rankdir = \"TB\"\n  bgcolor = \"#bfbfbf\"\n  \n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 16]\n\n  # several \"node\" statements\n  node [shape = plaintext,\n        fontname = Verdana,\n        fontcolor = black]\n  Z [label = \"Events\", fontcolor = \"#004A95\"]\n  X [label = \"Media Framing\"]\n  Y [label = \"Voting\"]\n\n  \n  # several \"edge\" statements\n  Z->X [color = \"#004A95\"]\n  X->Y [color = black]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-15ab92b3fe6685bc3239" style="width:90%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-15ab92b3fe6685bc3239">{"x":{"diagram":"\ndigraph boxes_and_circles {\n  \n  rankdir = \"TB\"\n  bgcolor = \"#bfbfbf\"\n  \n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 16]\n\n  # several \"node\" statements\n  node [shape = plaintext,\n        fontname = Verdana,\n        fontcolor = black]\n  Z [label = \"Events\", fontcolor = \"#004A95\"]\n  X [label = \"Media Framing\"]\n  Y [label = \"Voting\"]\n\n  \n  # several \"edge\" statements\n  Z->X [color = \"#004A95\"]\n  X->Y [color = black]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ]
 
@@ -216,7 +218,6 @@ Events drive media attention to considerations, e.g.
 
 ## Summary
 
-&lt;br&gt;
 
 - **Goal**: Project tries to challenge assumption that issues always affect voters similarly.
 - **Argument**: dominant media framing of issues affects party support.
@@ -231,6 +232,7 @@ Events drive media attention to considerations, e.g.
 - Does theory make sense?
 - Time Frame (2017 campaign or longer?)
 - Manifestos for party frames?
+- SVAR correct model? (might go for unidirectional model with 2SLS)
 - Additional Experiment?
 - ...?
 
@@ -251,7 +253,7 @@ class: inverse, middle, center
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false,
+"countIncrementalSlides": true,
 "ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
