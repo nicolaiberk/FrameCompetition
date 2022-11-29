@@ -12,6 +12,7 @@ library(tidyverse)
 library(here)
 library(data.table)
 library(word2vec)
+library(manifestoR)
 
 # parameters ####
 sampling <- T
@@ -21,6 +22,10 @@ cat("Cleaning in progress...")
 
 cat("\tClean and merge news corpus...")
 source("code/preprocessing/preprocess_news.R")
+
+cat("\tget manifestos...")
+source("code/preprocessing/get_manifestos.R")
+
 
 cat("All cleaned up.\n\n")
 
