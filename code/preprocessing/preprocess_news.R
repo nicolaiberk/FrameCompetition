@@ -8,19 +8,18 @@
 #  R version 4.1.1 (2021-08-10)
 # ______________________________________________
 
+clean_list <- c()
 
-for (corpus in list.files(here("data/raw/media/newspapers"))){
+for (corpus in list.files(here("data/raw/media/newspapers"))){; clean_list <- c(clean_list, "corpus")
   
-  # load ####
   if (str_detect(corpus, "bild")){
     
     dta <- 
       fread(here(paste0(here("data/raw/media/newspapers/", corpus)))) %>% 
       mutate(date_clean = as.Date(date),
-             paper = "bild") %>%  # clean
+             paper = "bild") %>%
       select(date_clean, text, paper)
     
-    # write
     
   }else if (str_detect(corpus, "faz")){
     
@@ -72,11 +71,21 @@ for (corpus in list.files(here("data/raw/media/newspapers"))){
            append = T, 
            showProgress = T)
     
+    fwrite(dta$text,
+           file = "data/processed/media/news_merged_textonly.csv", 
+           append = T)
+    
   }else{
     
     fwrite(dta,
            file = "data/processed/media/news_merged.csv")
     
+    write(list(dta$text),
+           file = "data/processed/media/csv")
+    
   }
   
 }
+
+rm(list = clean_list)
+
