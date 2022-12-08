@@ -1,5 +1,5 @@
 ---
-title: "Frame Competition"
+title: "Frame Competition - Assessing the Impact of News Framing on Parties' Electoral Performance with Document Embeddings"
 author: "Nicolai Berk"
 date: "`r Sys.Date()`"
 output:
@@ -11,7 +11,7 @@ output:
 subtitle: Manuscript prepared for the OX|BER workshop, Berlin, July 14th-15th.
 fontsize: 12pt
 geometry: margin=1.5in
-abstract: "Issue ownership theory assumes that the salience of specific issues is always more or less beneficial to a given party. I introduce the concept of 'frame competition' and argue that a given issue can be more or less beneficial for parties dependent on the dominant framing. I test this argument using data from the German 2017 Bundestag campaign, assessing the similarity of media coverage on migration to parties' migration framing with topic vectors. Using VAR models and an instrumental variable approach, I show whether higher frame similarity is associated with better performance in the polls. The findings broaden our understanding party competition and underline possibilities for political change, as well as parties' capability to compete, even when the issue agenda is given."
+abstract: "Issue ownership theory assumes that the salience of specific issues is always more or less beneficial to a given party. I introduce the concept of frame competition and argue that a given issue can be more or less beneficial for parties, dependent on the dominant framing. I test this argument by estimating the similarity of media coverage about migration to parties' migration framing with document embeddings, using data from Germany 2013-2019. Combining this similarity measure with VAR models, I show whether higher frame similarity is associated with better performance in the polls. The findings broaden our understanding of voting behaviour and the strategies political parties can employ in the face of a hostile issue agenda."
 bibliography: C:/Users/nicol/Dropbox/Studium/BibTex/PhD.bib
 ---
 
@@ -34,9 +34,11 @@ for (filename in list.files(here("code/functions"))){
 
 ```
 
+*This manuscript has been enriched by commentary from Tarik Abou-Chadi, Daniel Bischof, Luis Cornago Bonal, Sophia Hunger, Antonio Valentim, Klaudia Wegschaider, Lisa Zehnter.*
+
 # Introduction
 
-One of the most prominent explanations for parties' electoral success in scholarly and public debate is the issue agenda at a given election: the more prominent an issue was among political parties, news media, and voters, the more it would influence the latter's electoral decision making. Certain issues are therefor more favorable to given parties and parties will try to focus on 'their' issues in public communication [@Budge1983; @Petrocik1996; @Walgrave2012]. In extension, it is assumed that the main form of electoral competition in contemporary Western European democracies is *issue competition*, in the sense that parties compete to bring 'their' issue on the agenda [@GreenPedersen2019].
+One of the most prominent explanations for parties' electoral success in scholarly and public debate is the issue agenda at a given election: the more prominent an issue was among political parties, news media, and voters, the more it would influence the latter's electoral decision making. Certain issues are therefore more favorable to given parties and parties will try to focus on 'their' issues in public communication [@Budge1983; @Petrocik1996; @Walgrave2012]. In extension, it is assumed that the main form of electoral competition in contemporary Western European democracies is *issue competition*, in the sense that parties compete to bring 'their' issue on the agenda [@GreenPedersen2019].
 
 The present paper sets out to challenge this simple model of issue ownership by looking into party competition *within* issues. Building on a large body of experimental work, I argue that - dependent on the relative emphasis of different considerations in public debate, also known as *emphasis framing* - any issue can be more or less favorable to a given party. As issues on the media agenda usually emerge externally [@Boydstun2013], issue ownership theory suggests that parties' electoral fate is statically bound to the media agenda of the day. My model of *frame competition* gives parties substantial agency by suggesting that political actors not only compete over *which* issues are talked about, but also *how*.
 
@@ -46,7 +48,9 @@ I test this argument using data from the German 2017 Bundestag campaign, during 
 
 # Issue Ownership Theory
 
-The classic formulation of issue ownership theory argues that parties 'own' issues when they are peceived as more competent handling the issue [@Budge1983]. If the problem pressure regarding that issue increases and the issue rises to prominence, voters are more likely to base their voting decision on that issue and choose the party that is considered most able to deal with the issue. Over time, scholars have differentiated between this 'competence-based' and an 'associative' form of issue ownership. The latter emphasizes the process of voters' implicit and spontaneous association of an issue with a given party, thereby increasing the likelihood to vote for that party [@Lefevere2015b].
+The classic formulation of issue ownership theory argues that parties 'own' issues when they are peceived as more competent handling the issue [@Budge1983]. If the problem pressure regarding that issue increases and the issue rises to prominence, voters are more likely to base their voting decision on that issue and choose the party that is considered most able to deal with the issue. Over time, scholars have differentiated between this 'competence-based' and an 'associative' form of issue ownership. The latter emphasizes the process of voters' implicit and spontaneous association of an issue with a given party, thereby increasing the likelihood to vote for that party [@Lefevere2015b]. 
+
+<!-- Sophia Hunger: does associative framing really affect voting? [I am not sure if it is so relevant to go into this distinction] -->
 
 Whichever the mechanism, both conceptualizations imply that parties perform better electorally when 'their' issue is on the top of the agenda, because voters either are more likely to perceive them as the most competent party in the current issue environment or because they are simply more likely to make it to the pool of viable options in a voters' mind:
 
@@ -57,6 +61,8 @@ As mentioned, issue ownership theory assumes that party competition is largely a
 # Framing and Party Competition
 
 I suggest that issues can have a differential impact on parties electoral prospects, dependent on *how* they are discussed. Given an issue like migration dominates media coverage, this does not necessarily suggest that the issue owner - typically radical right parties - profits from this electorally. If, for example, migration is discussed as a humanitarian issue, e.g. migrants dying at the border, or refugees fleeing war, the issue should favor those parties with more welcoming migration positions more compared to when migration is discussed as a security problem, emphasizing crime and the potential danger of terrorism.
+
+<!-- Sophia HUnger finds the above paragraph very convincing ;) -->
 
 Consider the example in figure \@ref(fig:afdmigration) below. The top panel shows the weekly share of news articles devoted to migration in the major German daily newspapers, from January 2015 to June 2016. As we can see, attention to migration experiences a huge increase in September 2015, when the decision was made to let refugees stranded at Keletti station in Budapest, Hungary, pass to Germany. Issue Ownership theory suggests that this large increase in salience should directly translate into electoral support for the issue owner - in this case, the radical right *AfD*.
 
@@ -87,14 +93,14 @@ afd_poll_plot <-
   filter(date < as.Date("2016-07-01"),
          date >= as.Date("2015-01-01")) %>% 
   mutate(week = lubridate::floor_date(date, "week")
-         # , post = date >= as.Date("2016-01-01")
+         , post = date >= as.Date("2016-01-01")
          ) %>% 
   group_by(week
-           # , post
+           , post
            ) %>% 
   summarise(parties.AfD = mean(parties.AfD)) %>% 
   ggplot(aes(week, parties.AfD
-             # , group = post
+             , group = post
              )) +
   geom_point() +
   geom_smooth(method = "gam") +
@@ -130,7 +136,9 @@ mig_salience_plot / afd_poll_plot
 
 ```
 
-The AfD's electoral prospect as reported in opinion polls is plotted in the panel below, for the same time frame. As we can see, the increase in voting intention for the radical right party trails the increase in salience by several months. In fact, the party experiences a \*low\* right around the peak in immigration coverage. Why might that be? Is it really the case that it took voters three to six months to understand that migration was a pressing issue on the political agenda, despite the omnipresence of the issue in the news media? I suggest another explanation, which points to the changing *content* of the migration discourse. While the media coverage in the early stages of the refugee movements in 2015 focused on the tragic drownings in the Mediterranean sea, reasons for refugees' escape from their home countries, and humanitarian issues, the discourse slowly shifted to focus on perceived problems with the newly arrived. Especially new years eve 2015/16 marked a turning point, when hundreds of sexual abuses by men whom the victims perceived to be of arabic descent in Cologne were reported (if you look closely, you can see a discontinuity surrounding that date in the AfD-share, which increases around one and a half percentage points at that very date).
+The AfD's electoral prospect as reported in opinion polls is plotted in the panel below, for the same time frame. As we can see, the increase in voting intention for the radical right party trails the increase in salience by several months. In fact, the party experiences a *low* right around the peak in immigration coverage. Why might that be? Is it really the case that it took voters three to six months to understand that migration was a pressing issue on the political agenda, despite the omnipresence of the issue in the news media? I suggest another explanation, which points to the changing *content* of the migration discourse. While the media coverage in the early stages of the refugee movements in 2015 focused on the tragic drownings in the Mediterranean sea, reasons for refugees' escape from their home countries, and humanitarian issues, the discourse slowly shifted to focus on perceived problems with the newly arrived. Especially new years eve 2015/16 marked a turning point, when hundreds of sexual abuses by men whom the victims perceived to be of arabic descent in Cologne were reported (if you look closely, you can see a discontinuity surrounding that date in the AfD-share, which increases around one and a half percentage points at that very date).
+
+<!-- Sophia Hunger likes this -->
 
 To be clear, I do not suggest that the salience of issues does not matter. Existing preferences in the electorate surely make certain issues more or less favourable for given parties at a specific moment in time. However, I suggest that the *content* of the public debate surrounding an issue shapes the mental representations of this issue in the electorate, and subsequently affects both their issue preferences and their voting behaviour. This would have profound implications for our understanding of party competition. For example, parties' strategic options look very different through this theoretical lens. Rather than remaining mute on unfortunate issues and desperately trying to change an uncontrollable media agenda, parties should communicate on any issue and promote arguments that bolster their position on this issue. Existing research suggests that this is a successful strategy [@Jerit2008]. Similarly, public preferences on an issue are not simply given *a priori*, but rather shaped by the considerations brought up in a changing public discourse.
 
@@ -152,7 +160,7 @@ Lastly, I should mention that I assume that parties emphasise issue consideratio
 
 *Frame Competition Hypothesis: The more similar the media's framing of an issue to a given parties' issue framing, the better that parties' electoral prospect.*
 
-One key difference compared to other models of party competition, especially the one described in @Meguid2005 is that in the present model, party positions are considered fixed, while it is the media debate that moves. Large shifts in parties' issue positions are generally rare [@SOURCE], but the media debate is in permanent flux, promoting a constantly changing set of issues and related considerations to voters. Political actors sponsor frames and arguments, only some of which get to influence the debate. While the classic model described in @Meguid2005 views parties' electoral performance as a function of party position and issue salience, the present model views their electoral performance as a function of issue salience and the similarity of the dominant set of issue considerations to the set of considerations emphasized by the party.
+One key difference compared to other models of party competition, especially the one described in @Meguid2005 is that in the present model, party positions are considered fixed, while it is the media debate that moves. Large shifts in parties' issue positions are generally rare [@Gessler2022], but the media debate is in permanent flux, promoting a constantly changing set of issues and related considerations to voters. Political actors sponsor frames and arguments, only some of which get to influence the debate. While the classic model described in @Meguid2005 views parties' electoral performance as a function of party position and issue salience, the present model views their electoral performance as a function of issue salience and the similarity of the dominant set of issue considerations to the set of considerations emphasized by the party.
 
 # Research Design
 
@@ -160,7 +168,7 @@ One key difference compared to other models of party competition, especially the
 
 [^2]: I am not entirely sure if it is smart to restrict myself to the 2017 campaign, as there should be more variation over time, especially moving from late 2015 to 2016, as described in section \@ref(framing-and-party-competition). So far, this was a choice entirely made based on the use of the 2017 manifestos, but I might also combine the 2013 and 2017 manifestos and track the issue across time.
 
-In order to study whether framing can change parties' electoral prospects, an ideal case would show substantial variation surrounding the framing of an issue but little variation in parties' positions. Ideally, the variation in salience would be limited and uncorrelated to the variation of the framing. I choose the case of the election campaign for the German Bundestagswahl 2017 as I consider most of these criteria are met. After the refugee movements throughout Europe in 2015, voters considered migration the most important issue [@Wessels2021, p. 12], and the media still discussed the issue, but at lower levels compared to 2017 (see figure \@ref(fig:salplot)). I expect that events during the election campaign, such as migrant crimes, conflicts regarding the intra-EU distribution of refugees, international terrorism, humanitarian crises as those among the Rohingya in Myanmar, as well as drownings in the Mediterranean sea lead to substantial variation in the set of considerations regarding migration being discussed - the key independent variable.
+In order to study whether framing can change parties' electoral prospects, an ideal case would show substantial variation surrounding the framing of an issue but little variation in parties' positions. Ideally, the variation in salience would be limited and uncorrelated to the variation of the framing. I choose the case of the election campaign for the German Bundestagswahl 2017 as I consider most of these criteria are met. After the refugee movements throughout Europe in 2015, voters considered migration the most important issue [@Wessels2021, p. 12], and the media still discussed the issue, but at lower levels compared to 2015 (see figure \@ref(fig:salplot)). I expect that events during the election campaign, such as migrant crimes, conflicts regarding the intra-EU distribution of refugees, international terrorism, humanitarian crises as those among the Rohingya in Myanmar, as well as drownings in the Mediterranean sea lead to substantial variation in the set of considerations regarding migration being discussed - the key independent variable.
 
 ```{r salplot, fig.cap="Salience of the immigration issue in the major German weekly newspapers (Bild, FAZ, Spiegel, SZ, taz, Welt), 2014-2017."}
 

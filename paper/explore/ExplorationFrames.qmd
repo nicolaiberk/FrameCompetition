@@ -1,0 +1,54 @@
+---
+title: "Preliminary Analysis Party Frames Migration"
+author: "Nicolai Berk"
+format: html
+editor: visual
+---
+
+## Introduction
+
+```{r setup}
+
+knitr::opts_chunk$set(echo = F, message = F, warning = F, cache = T, fig.height=6, fig.width=10, fig.align='center', eval = T)
+
+# Setup ####
+library(tidyverse)
+library(here)
+library(data.table)
+library(word2vec)
+
+
+# load self-made functions
+for (filename in list.files(here("code/functions"))){
+  source(here(paste0('code/functions/', filename)))
+}
+
+```
+
+This document contains some preliminary analyses of frames employed in news coverage and party communication about migration. All analyses are based on a subsample and supposed to inform any analyses on a broader sample later on.
+
+## Explore Embeddings
+
+We start by exploring the quality of our word embeddings:
+
+```{r wordembeddings}
+
+# load model
+w2v_model <- 
+  read.word2vec(here("data/processed/embeddings/w2v_news_sample.bin"))
+
+# read vectors
+load(here("data/processed/embeddings/w2v_news_vectors_sample.Rdata"))
+
+vector <- emb["Ausländer", ]
+predict(w2v_model, vector, type = "nearest", top_n = 10)
+
+  
+
+```
+
+## Frames in Migration coverage
+
+## Frames in Party Coverage
+
+## Association of Party and Migration Coverage

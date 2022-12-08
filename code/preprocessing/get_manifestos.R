@@ -9,16 +9,18 @@
 # ______________________________________________
 
 # parameters ####
-clean_list <- c()
+whitelist <- ls()
 
 
 # Get data ####
 mp_setapikey("data/raw/manifestos/manifesto_apikey.txt")
 
-my_corpus <- mp_corpus(countryname == "Germany" & edate > as.Date("2020-01-01"))
+my_corpus <- mp_corpus(countryname == "Germany" & 
+                         edate < as.Date("2014-01-01") & 
+                         edate > as.Date("2013-01-01"))
 
 #
-mpds <- mp_maindataset()
+mpds <- mp_maindataset(); clean_list <- c(clean_list, "mpds")
 
 # generatae dataset ####
 corpus <- data.frame(doc_id = NULL, text = NULL)
@@ -44,8 +46,5 @@ for (doc in names(my_corpus)){
 fwrite(corpus, "data/raw/manifestos/manifestos.csv")
 
 # clean up ####
-rm(list = clean_list)
-
-
-
+rm(ls()[!ls() %in% whitelist])
 

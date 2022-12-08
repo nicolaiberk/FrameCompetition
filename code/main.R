@@ -15,7 +15,7 @@ library(word2vec)
 library(manifestoR)
 
 # parameters ####
-sampling <- T
+sampling <- F
 
 # cleaning ####
 cat("Cleaning in progress...")
@@ -44,7 +44,7 @@ cat("Done sampling.\n\n")
 # embeddings ####
 cat("Estimating embeddings...")
 
-cat("\tEstimating word2vec...")
+cat("\tEstimating word2vec (be patient) ...")
 source("code/embeddings/word_embeddings.R")
 
 cat("\tEstimating doc2vec: party embeddings...")

@@ -13,7 +13,3 @@ fread("data/processed/media/news_merged.csv") %>%
   sample_n(10000) %>% 
   fwrite("data/processed/media/news_merged_sample.csv")
 
-fread("data/processed/media/news_merged_textonly.txt") %>% 
-  sample_n(10000) %>% 
-  fwrite("data/processed/media/news_merged_textonly_sample.txt")
-

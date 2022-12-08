@@ -10,7 +10,9 @@
 
 clean_list <- c()
 
-for (corpus in list.files(here("data/raw/media/newspapers"))){; clean_list <- c(clean_list, "corpus")
+clean_list <- c(clean_list, c("corpus", "dta"))
+
+for (corpus in list.files(here("data/raw/media/newspapers"))){
   
   if (str_detect(corpus, "bild")){
     
@@ -71,17 +73,11 @@ for (corpus in list.files(here("data/raw/media/newspapers"))){; clean_list <- c(
            append = T, 
            showProgress = T)
     
-    fwrite(dta$text,
-           file = "data/processed/media/news_merged_textonly.csv", 
-           append = T)
-    
   }else{
     
     fwrite(dta,
-           file = "data/processed/media/news_merged.csv")
-    
-    write(list(dta$text),
-           file = "data/processed/media/csv")
+           file = "data/processed/media/news_merged.csv", 
+           showProgress = T)
     
   }
   
