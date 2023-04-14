@@ -21,7 +21,8 @@ topics <-
     dplyr::select(!contains("Stock Market")) %>%
     colnames() %>%
     str_replace("Association \\(reduced\\): ", "") %>%
-    str_replace("Association ", "")
+    str_replace("Association ", "") %>%
+    str_replace("\\(ot\\)\\:", "ot")
 
 rm(merged)
 
@@ -70,8 +71,7 @@ for (i in seq_len(nrow(var_results))) {
             aggregation = var_results$aggregation[i],
             topic_metric = var_results$topic_metric[i],
             controls = var_results$controls[i],
-            max_lag = var_results$lag_max[i],
-            plot_var = FALSE
+            max_lag = var_results$lag_max[i]
         )
 
     var_results[i, c("point_party_dv", "lower_party_dv", "upper_party_dv")] <-

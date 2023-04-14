@@ -6,8 +6,7 @@ var_topic <-
         controls = NA,
         max_lag = 12,
         topic_metric = "association",
-        aggregation = "ym",
-        plot_var = FALSE) {
+        aggregation = "ym") {
 
     ## load data
     merged <- data.table::fread("data/processed/media/merged.csv")
@@ -36,15 +35,21 @@ var_topic <-
             wday = wday(date)
             )
 
+    ## rename columns
+    colnames(merged_agg) <-
+        str_replace(colnames(merged_agg), "\\(ot\\)", "ot")
+
     ## define topic metric
     if(topic_metric == "association") {
-        if (grepl(topic, pattern = "\\(ot\\)")) {
-            topic_var <- paste0("Association ", topic)
+        if (grepl(topic, pattern = "\\bot\\s")) {
+            topic_var <- str_replace(topic, "\\bot", "ot\\:")
+            topic_var <- paste0("Association ", topic_var)
         } else {
             topic_var <- paste0("Association (reduced): ", topic)
         }
+    }else{
+        topic_var <- topic
     }
-                    
 
     if (topic_metric == "share"){
         merged_agg[topic_var] <-
