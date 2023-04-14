@@ -57,13 +57,28 @@ rsconnect/
 # Data
 data
 
+# comments
+comments
+
 # Literature
 lit
+
+# Models
+models
+
+# Plots
+Plots
+
+# Paper
 paper/Manuscript*
 !paper/Manuscript.pdf
 !paper/Manuscript_files
 !paper/Manuscript.Rmd
+
+# code
+code/explore
+
+# other
 log.txt
-*Comments*
-*comments*
-MeetingJanaBernhard230112.txt
+.gitignore
+make.mak
