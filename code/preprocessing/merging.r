@@ -4,7 +4,7 @@ library(vars)
 library(data.table)
 library(zoo)
 
-topics  <- fread("data/processed/media/docs_topics_sims.csv")
+topics  <- fread("data/processed/media/full_ests.csv")
 polls <- fread("data/raw/polls/polls.csv")
 
 ## generate topic dummies
@@ -33,12 +33,17 @@ colnames(topics_agg) <-
     colnames(topics_agg) %>%
     str_replace(".data_", "(ot) ")
 
-topics_agg <- 
+topics_agg <-
     topics_agg %>%
     dplyr::select(!contains(".data"), -topic_label)
 
+## add dictionary estimates
+topics_agg <-
+    topics_agg %>%
+    cbind(topics %>% dplyr::select(contains("ext_")))
+
 ## aggregate topics
-topics_agg <- 
+topics_agg <-
     topics_agg %>%
     group_by(date_clean, paper) %>%
     summarise(
@@ -80,6 +85,13 @@ merged <-
            week = week(date),
            wday = lubridate::wday(date, label = T, week_start = 1),
            yw = paste(year(date), week(date), sep = "-"))
+
+## calculate dict words per migration article
+merged <-
+    merged %>%
+    mutate(
+        across(contains("ext_"), ~.x/mig_sal)
+    )
 
 ## save
 merged %>%
