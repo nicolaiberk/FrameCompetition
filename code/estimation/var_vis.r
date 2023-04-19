@@ -5,24 +5,29 @@ library(dplyr)
 var_results <- read.csv("data/processed/estimation/var_results.csv")
 
 ## topics
-merged <- data.table::fread("data/processed/media/merged.csv")
-merged %>%
-    dplyr::select(`AfD Topic`:`Young Refugees`) %>%
-    summarise_all(sum) %>%
-    t() -> topic_dist
+top_topics <- 
+    c(
+        "AfD Topic", "Refugee Arrival", "Arrival in Munich", 
+        "Attacks on Refugee Homes", "Schengen Border Control", 
+        "Refugee Crime", "Deportation", 
+        "Police Action Against Human Trafficking", 
+        "Labor Market", "Humanitarian Crisis Mediterranean", 
+        "Syrian Civil War", "Welfare Migration"
+        )
+dict_topics <- 
+    c(
+        "ext_afd", "ext_arrival", "ext_attacks", 
+        "ext_borders", "ext_crime", "ext_deportation", 
+        "ext_humantrafficking", "ext_labormarket", 
+        "ext_mediterraneancrisis", "ext_welfare"
+    )
 
-row.names(topic_dist)[order(topic_dist, decreasing = T)] -> top_topics
-
-top_topics <- c(top_topics, "AfD Topic")
-
-## plot
+## plot topic estimates
 var_results %>%
-    filter(topic_metric == "association",
-           aggregation == "yw",
-           topic %in% top_topics,
-           is.na(controls)) %>%
+    filter(aggregation == "ym",
+           topic %in% top_topics) %>%
     ggplot(aes(y = topic,
-               x = point_party_dv, 
+               x = point_party_dv,
                xmin = lower_party_dv,
                xmax = upper_party_dv,
                color = (lower_party_dv > 0 | upper_party_dv < 0))) +
@@ -35,12 +40,35 @@ var_results %>%
 
 ggsave(filename = "plots/var_top_topics.svg", width = 15, height = 10)
 
+## plot dict estimates
+## plot
+var_results %>%
+    filter(aggregation == "ym",
+           topic %in% dict_topics) %>%
+    mutate(topic = str_replace(topic, "ext_", "")) %>%
+    mutate(topic = toupper(topic)) %>%
+    ggplot(aes(y = topic,
+               x = point_party_dv,
+               xmin = lower_party_dv,
+               xmax = upper_party_dv,
+               color = (lower_party_dv > 0 | upper_party_dv < 0))) +
+    geom_vline(xintercept = 0) +
+    geom_pointrange() +
+    theme_minimal() +
+    theme(legend.position = "none") +
+    facet_grid(~party, scales = "free_x") +
+    ggtitle("Framing Effects on Party Polling")
+
+ggsave(filename = "plots/var_top_dicts.svg", width = 15, height = 10)
+
+
+
 
 ## plot all estimates sorted by effect size per party
 for (p in unique(var_results$party)){
     var_results %>%
         filter(topic_metric == "association",
-               aggregation == "yw",
+               aggregation == "ym",
                is.na(controls),
                party == p) %>%
         ggplot(aes(x = reorder(topic, -point_party_dv),
@@ -85,8 +113,7 @@ var_results <-
         stringsAsFactors = F
     )
 
-aggregation <- "yw"
-topic_metric <- "association"
+aggregation <- "ym"
 controls <- NA
 max_lag = 12
 
