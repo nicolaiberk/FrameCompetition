@@ -17,12 +17,21 @@ parties <-
 
 topics <-
     merged %>% 
-    dplyr::select(contains("Association")) %>% 
+    dplyr::select(contains("Association") | contains("ext_")) %>% 
     dplyr::select(!contains("Stock Market")) %>%
+    dplyr::select(!contains("(ot):")) %>%
+    dplyr::select(
+        contains("ext_"), paste("Association (reduced):",
+         c("AfD Topic", "Refugee Arrival", "Arrival in Munich",
+        "Attacks on Refugee Homes", "Schengen Border Control", "Refugee Crime",
+        "Deportation", "Police Action Against Human Trafficking",
+        "Labor Market", "Humanitarian Crisis Mediterranean",
+        "Syrian Civil War", "Welfare Migration"))
+        ) %>%
     colnames() %>%
     str_replace("Association \\(reduced\\): ", "") %>%
-    str_replace("Association ", "") %>%
-    str_replace("\\(ot\\)\\:", "ot")
+    str_replace("Association ", "")
+    # str_replace("\\(ot\\)\\:", "ot") %>%
 
 rm(merged)
 
@@ -35,7 +44,6 @@ var_results <-
         party = parties,
         controls = NA,
         aggregation = c("yw", "ym", "yq"),
-        topic_metric = c("association", "share", "absolute"),
         
         ## outputs
         point_party_dv = NA,
@@ -55,6 +63,11 @@ var_results <-
                 aggregation == "ym" ~ 12,
                 aggregation == "yq" ~ 4,
                 aggregation == "date" ~ 30
+            ),
+        topic_metric = 
+            case_when(
+                grepl(topic, pattern = "ext_") ~ "absolute",
+                !grepl(topic, pattern = "ext_") ~ "association",
             )
     )
 

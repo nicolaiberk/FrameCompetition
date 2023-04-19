@@ -27,7 +27,8 @@ var_topic <-
             across(contains("Assoc"), ~mean(.x, na.rm = T)),
             across(AfD:Union, ~mean(.x, na.rm = T)),
             across(`AfD Topic`:`Young Refugees`, ~sum(.x, na.rm = T)),
-            across(`(ot) Abschiebung 1`:`(ot) Koalitionsstreit über Transitzonen`, ~sum(.x, na.rm = T))
+            across(`(ot) Abschiebung 1`:`(ot) Koalitionsstreit über Transitzonen`, ~sum(.x, na.rm = T)),
+            across(ext_afd:ext_welfare, ~sum(.x, na.rm = T))
         ) %>%
         mutate(
             year = year(date),
