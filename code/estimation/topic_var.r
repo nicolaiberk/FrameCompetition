@@ -87,10 +87,10 @@ for (i in seq_len(nrow(var_results))) {
             max_lag = var_results$lag_max[i]
         )
 
-    var_results[i, c("point_party_dv", "lower_party_dv", "upper_party_dv")] <-
+    var_results[i, c("point_party_iv", "lower_party_iv", "upper_party_iv")] <-
         var_raw$`poll ~ topic`
 
-    var_results[i, c("point_topic_dv", "lower_topic_dv", "upper_topic_dv")] <-
+    var_results[i, c("point_topic_iv", "lower_topic_iv", "upper_topic_iv")] <-
         var_raw$`topic ~ poll`
 }
 
