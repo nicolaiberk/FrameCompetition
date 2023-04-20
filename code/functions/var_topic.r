@@ -101,29 +101,29 @@ var_topic <-
     topic_irf <- str_replace_all(topic_var, "[\\(\\)\\:\\s\\,\\-\\'\\&]", ".")
 
     # get estimate according to chosen lag
-    point_dv_party <- ifun$irf[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
-    lower_dv_party <- ifun$Lower[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
-    upper_dv_party <- ifun$Upper[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
+    point_iv_party <- ifun$irf[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
+    lower_iv_party <- ifun$Lower[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
+    upper_iv_party <- ifun$Upper[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
 
 
-    point_dv_topic <- ifun$irf[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
-    lower_dv_topic <- ifun$Lower[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
-    upper_dv_topic <- ifun$Upper[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
+    point_iv_topic <- ifun$irf[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
+    lower_iv_topic <- ifun$Lower[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
+    upper_iv_topic <- ifun$Upper[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
 
 
     return(
         list(
-            "poll ~ topic" =
-                list(
-                    "point" = point_dv_party,
-                    "lower" = lower_dv_party,
-                    "upper" = upper_dv_party
-                ),
             "topic ~ poll" =
                 list(
-                    "point" = point_dv_topic,
-                    "lower" = lower_dv_topic,
-                    "upper" = upper_dv_topic
+                    "point" = point_iv_party,
+                    "lower" = lower_iv_party,
+                    "upper" = upper_iv_party
+                ),
+            "poll ~ topic" =
+                list(
+                    "point" = point_iv_topic,
+                    "lower" = lower_iv_topic,
+                    "upper" = upper_iv_topic
                 )
         )
     )
