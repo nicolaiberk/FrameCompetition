@@ -1,0 +1,302 @@
+---
+title: "Does Media Framing Affect Party Performance?"
+subtitle: "Presentation at the Dynamics RTG Colloquium"
+author: "Nicolai Berk"
+institute: "Humboldt Universität Berlin"
+date: "`r Sys.Date()`"
+date-format: "DD.MM.YYYY"
+logo: vis/dynamics.jpg
+footer: "Nicolai Berk | Media Framing and Party Performance"
+format: 
+  revealjs:
+    theme: [simple, custom.scss]
+    embed-resources: true
+editor: visual
+bibliography: "C:/Users/nicol/Dropbox/Studium/BibTex/PhD.bib"
+---
+
+
+## Motivation
+```{r setup, echo=F, include=F}
+
+library(tidyverse)
+library(dplyr)
+
+```
+
+![Source: [Pew Research Center](https://www.pewresearch.org/fact-tank/2022/09/08/republicans-and-democrats-have-different-top-priorities-for-u-s-immigration-policy/)](vis/pewRD.png)
+
+
+## Emphasis Framing
+
+<br>
+
+- Voters draw on different <mark>considerations</mark> when evaluating issues.
+- Exposure to different considerations changes attitudes. <font size="5"> [@Nelson1997Rally]</font>
+- Spatial model suggests this should translate into voting behaviour.
+- Party competition research mostly concerned with issue emphasis. <font size="5"> [@GreenPedersen2019]</font>
+
+## Contradicting Predictions
+
+<br>
+
+::: columns
+
+::: {.column}
+
+
+### Issue Ownership
+
+```{mermaid}
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#003366',
+      'primaryTextColor': '#fff',
+      'primaryBorderColor': '#003366',
+      'lineColor': '#2171c2',
+      'secondaryColor': '#2171c2',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
+flowchart LR
+  A(Issue\nSalience) --> B(Party\nPosition)
+  B --> C(Voting)
+```
+
+*All forms of immigration coverage benefit RR*
+
+:::
+::: {.column}
+
+### Emphasis Framing
+```{mermaid}
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#003366',
+      'primaryTextColor': '#fff',
+      'primaryBorderColor': '#003366',
+      'lineColor': '#2171c2',
+      'secondaryColor': '#2171c2',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
+flowchart LR
+  A(Frame\nPrevalence) --> B(Voter\nPosition)
+  B --> C(Voting)
+```
+
+*Pro-Immigration Frames hurt RR*
+
+:::
+:::
+
+# Empirical Strategy
+
+## Measuring Media Framing {background-image="https://raw.githubusercontent.com/ddangelov/Top2Vec/master/images/hdbscan_docs.png" background-size="70%" background-repeat="no-repeat" background-opacity="0.3" background-position="right 0% bottom 0%"}
+
+<br>
+
+
+
+1. Identify migration content with supervised [BERT model](#BERT).
+2. Generate <mark>document embeddings</mark> for migration articles.
+3. Cluster embeddings into topics using `top2vec`.
+4. Annotate based on most similar document and word vectors.
+
+
+
+## Validation of Frame Estimates
+
+
+![Different Crime Measures](../plots/Measures/crime_estimates.png)
+
+## Validation Frame Estimates II
+
+:::: {.columns}
+::: {.column width="50%"}
+
+![Document Level](../plots/Measures/crime_est_cor_doclevel.png)
+
+:::
+
+::: {.column width="50%"}
+
+![Monthly Aggregation](../plots/Measures/crime_est_cor_monthly.png)
+
+:::
+::::
+
+## Topic Distribution over Time
+
+![](../plots/descriptives/topics_descriptives.png)
+
+## Measuring Party Preferences
+
+<br><br>
+
+- Current: Aggregated polling from [Politico's PollOfPolls](https://www.politico.eu/europe-poll-of-polls/).
+- Planned: Daily [forsa-Bus](https://search.gesis.org/?source=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%7B%22match_all%22%3A%7B%7D%7D%2C%22filter%22%3A%5B%7B%22term%22%3A%7B%22type%22%3A%22research_data%22%7D%7D%2C%7B%22term%22%3A%7B%22study_group.keyword%22%3A%22Forsa-Bus%22%7D%7D%5D%7D%7D%7D&lang=en) polls of sample of 500 German voters.
+
+## Party Performance
+
+![](../plots/descriptives/polls.png){fig-align="center"}
+
+## Estimating Effects on Party Performance
+
+<br>
+
+#### Inferential: RDD
+
+Exploit events creating <mark>discontinuities</mark> in migration coverage.
+
+<br> 
+
+#### Descriptive: VAR
+
+Assess <mark>over-time correlation</mark> of frames and party polls.
+
+# Preliminary Results
+
+
+# Regression Discontinuity Design
+
+
+## RDD
+
+## VAR
+
+![](../plots/var/top_topics_weekly.png)
+
+
+# Conclusion
+
+## Preliminary Summary of Results
+
+<br><br>
+
+- Framing *does* affect polling.
+- But unclear how this generalises.
+
+## Next Steps
+
+<br><br>
+
+- Get better data on dependent variable.
+  - Clear RDD estimate.
+  - Fine-grained VAR.
+- Look for additional events.
+- More validation of topics.
+
+
+# Thank you!
+
+<br>
+
+This research is generously supported by:
+
+::: {layout-ncol=2}
+
+![](vis/banner_new.png)
+
+![](vis/dfg_logo_englisch_blau_en.jpg)
+
+:::
+
+
+
+# Resources {visibility="uncounted"}
+
+::: {#refs}
+:::
+
+
+
+# Appendix {visibility="uncounted"}
+
+
+## Dictionary Estimates
+
+![](../plots/var/top_dicts_weekly.png)
+
+
+## Why [BERT](https://huggingface.co/docs/transformers/model_doc/bert) {#bert visibility="uncounted"}
+
+<br>
+
+
+- Pre-trained on large language corpus. <font size="5">([Details](https://www.deepset.ai/german-bert))</font> \
+<font color='#801414'>➡ less training data, better performance.</font>
+- Uses **contextual** embeddings. \
+<font color='#801414'>➡ "fish & **chips**" vs "poker **chips**".</font>
+- Outperforms humans on [SQuAD](https://rajpurkar.github.io/SQuAD-explorer/).
+- SOTA in text classification.
+
+<br>
+
+[BACK](#measuring-media-framing)
+
+
+![](vis/bertarch.png){.absolute width=400 bottom=0 right=0}
+
+
+## Dealing with Imbalance {#imbalance visibility="uncounted"}
+
+::: columns
+::: {.column width="70%"}
+
+::: callout-important
+## Imbalance: Little Information in Random Samples
+:::
+
+::: callout-tip
+## Informed Approach
+
+- Generate dictionary related to outcome class.
+- Extend using word embeddings to minimize bias.
+- Count occurences in data.
+- Draw stratified sample for subsequent training.
+
+**Ensures overweighting of minority class.**
+
+:::
+:::
+
+::: {.column width="30%"}
+
+<br>
+
+
+```{r, fig.height=4, fig.width=3}
+
+counts <- 
+  round(rbeta(1000, 0.2, 0.5)* 10, 0) %>%
+  as_tibble() %>% 
+  mutate(sample_id = cut(value, 
+                         c(-Inf, 0.5, 2.5, Inf), 
+                         c(1, 2, 3)),
+         id = 1:n())
+
+counts$sample_T <- rbinom(nrow(counts), 1, 0.05*(counts$value+1))
+
+counts %>% 
+  ggplot(aes(x = value)) +
+  geom_histogram(aes(fill = as.character(sample_T)), bins=3) +
+  scale_fill_manual(values = c("gray", "#003366"),
+                    labels = c("not sampled", "sampled")) +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom") +
+  xlab("# of dict terms in text") + ylab("Observations")
+
+
+```
+
+:::
+:::
+
+[BACK](#mediadata)
