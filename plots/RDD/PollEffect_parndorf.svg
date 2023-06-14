@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='432.00pt' height='288.00pt' viewBox='0 0 432.00 288.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA='>
+    <rect x='0.00' y='0.00' width='432.00' height='288.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNTIuMjF8NDI2LjUyfDM4Ljg1fDI1Ni41MA=='>
+    <rect x='52.21' y='38.85' width='374.31' height='217.65' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTIuMjF8NDI2LjUyfDM4Ljg1fDI1Ni41MA==)'>
+<polyline points='104.44,256.50 104.44,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='172.57,256.50 172.57,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='240.69,256.50 240.69,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='308.82,256.50 308.82,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='376.94,256.50 376.94,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='52.21,235.44 426.52,235.44 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='52.21,200.34 426.52,200.34 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='52.21,165.23 426.52,165.23 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='52.21,130.13 426.52,130.13 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='52.21,95.02 426.52,95.02 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='52.21,59.92 426.52,59.92 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='70.38,256.50 70.38,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='138.50,256.50 138.50,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='206.63,256.50 206.63,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='274.76,256.50 274.76,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='342.88,256.50 342.88,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='411.01,256.50 411.01,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<line x1='274.76' y1='256.50' x2='274.76' y2='38.85' style='stroke-width: 1.07; stroke: #BEBEBE; stroke-linecap: butt;' />
+<line x1='281.45' y1='235.44' x2='401.74' y2='235.44' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='69.22' y1='200.34' x2='211.59' y2='200.34' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='227.59' y1='165.23' x2='409.51' y2='165.23' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='212.88' y1='130.13' x2='345.12' y2='130.13' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='202.57' y1='95.02' x2='295.95' y2='95.02' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='201.08' y1='59.92' x2='311.63' y2='59.92' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<circle cx='341.60' cy='235.44' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='140.41' cy='200.34' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='318.55' cy='165.23' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='279.00' cy='130.13' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='249.26' cy='95.02' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='256.36' cy='59.92' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+</g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA=)'>
+<text x='47.28' y='238.59' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>AfD</text>
+<text x='47.28' y='203.49' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='22.99px' lengthAdjust='spacingAndGlyphs'>Union</text>
+<text x='47.28' y='168.38' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='18.09px' lengthAdjust='spacingAndGlyphs'>SPD</text>
+<text x='47.28' y='133.28' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='28.86px' lengthAdjust='spacingAndGlyphs'>Greens</text>
+<text x='47.28' y='98.17' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='14.69px' lengthAdjust='spacingAndGlyphs'>Left</text>
+<text x='47.28' y='63.07' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='17.59px' lengthAdjust='spacingAndGlyphs'>FDP</text>
+<text x='70.38' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='15.17px' lengthAdjust='spacingAndGlyphs'>-1.5</text>
+<text x='138.50' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='15.17px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='206.63' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='15.17px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='274.76' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='342.88' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='411.01' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='52.21' y='31.05' style='font-size: 11.00px; font-family: "Arial";' textLength='152.27px' lengthAdjust='spacingAndGlyphs'>Robust RD on PollOfPolls Data</text>
+<text x='52.21' y='14.93' style='font-size: 13.20px; font-family: "Arial";' textLength='164.02px' lengthAdjust='spacingAndGlyphs'>Effect of Parndorf on Polling</text>
+</g>
+</svg>

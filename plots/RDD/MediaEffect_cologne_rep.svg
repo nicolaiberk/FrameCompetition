@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='432.00pt' height='288.00pt' viewBox='0 0 432.00 288.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA='>
+    <rect x='0.00' y='0.00' width='432.00' height='288.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNjguMzV8NDI2LjUyfDM4Ljg1fDI1Ni41MA=='>
+    <rect x='68.35' y='38.85' width='358.17' height='217.65' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNjguMzV8NDI2LjUyfDM4Ljg1fDI1Ni41MA==)'>
+<polyline points='137.53,256.50 137.53,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='243.32,256.50 243.32,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='349.12,256.50 349.12,38.85 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='68.35,225.41 426.52,225.41 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='68.35,173.59 426.52,173.59 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='68.35,121.77 426.52,121.77 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='68.35,69.95 426.52,69.95 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='84.63,256.50 84.63,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='190.43,256.50 190.43,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='296.22,256.50 296.22,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='402.02,256.50 402.02,38.85 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<line x1='84.63' y1='256.50' x2='84.63' y2='38.85' style='stroke-width: 1.07; stroke: #BEBEBE; stroke-linecap: butt;' />
+<line x1='245.88' y1='225.41' x2='285.45' y2='225.41' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='273.35' y1='173.59' x2='336.46' y2='173.59' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='267.74' y1='121.77' x2='410.24' y2='121.77' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='154.86' y1='69.95' x2='185.13' y2='69.95' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<circle cx='265.66' cy='225.41' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='304.91' cy='173.59' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='338.99' cy='121.77' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+<circle cx='169.99' cy='69.95' r='2.84' style='stroke-width: 1.42; fill: #000000;' />
+</g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA=)'>
+<text x='63.41' y='228.56' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='45.00px' lengthAdjust='spacingAndGlyphs'>Association</text>
+<text x='63.41' y='176.74' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.54px' lengthAdjust='spacingAndGlyphs'>Topic</text>
+<text x='63.41' y='124.92' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>Dictionary</text>
+<text x='63.41' y='73.10' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='44.03px' lengthAdjust='spacingAndGlyphs'>Supervised</text>
+<text x='84.63' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='190.43' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='296.22' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='402.02' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>1.5</text>
+<text x='68.35' y='31.05' style='font-size: 11.00px; font-family: "Arial";' textLength='164.92px' lengthAdjust='spacingAndGlyphs'>Robust RD on Different Measures</text>
+<text x='68.35' y='14.93' style='font-size: 13.20px; font-family: "Arial";' textLength='271.04px' lengthAdjust='spacingAndGlyphs'>Effect of Cologne Reporting on Crime Framing</text>
+</g>
+</svg>
