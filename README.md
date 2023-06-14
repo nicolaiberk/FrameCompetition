@@ -1,24 +1,14 @@
 # Frame Competition
 
-![](plots/topics_over_time.png)
- 
+![Distribution of different migration topics over time](plots/Descriptives/topics_over_time.png)
+
 Issue ownership theory assumes that the salience of specific issues is always more or less beneficial to a given party. I introduce the concept of "frame competition" and argue that a given issue can be more or less beneficial for parties dependent on the dominant framing. I test this argument using data from the German 2017 election campaign, assessing the similarity of media coverage on migration to the parties' migration framing with topic vectors. Using VAR models, I show whether higher frame similarity is associated with better performance in the polls. The findings broaden our understanding party competition and show parties' capability to compete when the issue agenda is given.
 
 ## Structure of Code
 
-```
+```{txt}
 /code
     |___/collection
-        |___get_manifestos.R
-            # collection of manifestos
-            input:
-                # Manifesto APIKey (secret)
-                    "data/raw/manifestos/manifesto_apikey.txt"
-            output:
-                # German Manifestos 2013/17
-                   "data/raw/manifestos/manifestos1317.csv"
-                # German Manifestos 2013/17, Migration Content Only
-                    "data/raw/manifestos/manifestos1317_mig.csv"
         |___polls.R
             # collection of polling data from Politico's PollOfPolls
             ISSUES:
@@ -28,77 +18,6 @@ Issue ownership theory assumes that the salience of specific issues is always mo
                     "plots/descriptives/polls.png"
                 # polling data
                     "data/processed/polls.csv"
-    |___/embeddings
-        ISSUES:
-            integrate with /measurement
-            drop party similarity measures
-            split up EstimateTopics.ipynb
-
-        |___dict_ext.py
-                # embedding extension of dictionaries
-                input:
-                    # 
-                    "data/raw/embeddings/np_embs/np_emb"
-                    "data/raw/dicts/"
-                output:
-                    "data/processed/dicts/"
-        |___EstimateTopics.ipynb
-                # Top2Vec estimation and annotation
-                ISSUES:
-                    create separate files for model fitting and labelling
-                    split up into .py files
-                    rerun model generation to test reproducibility
-                input:
-                    "data/raw/media/bert_crime_clean.csv"
-                output:
-                    "models/t2v/migration_mindocs300" # Top2Vec model
-                    "data/processed/reduced_topic_labels.json" # topic labels
-                    "data/processed/media/topic_table.csv" # overview of topic prevalence and keywords
-                    "data/processed/embeddings/reduced_topics.csv" # vectors of reduced topics
-                    "data/processed/media/docs_topics_sims.csv" # main table of documents with topic incidence and association
-                    "data/processed/embeddings/documents.csv" # document vectors
-        |___party_embeddings.py
-                # generate document vectors for party manifestos
-                # estimate cosin similarity of media coverage to party communication
-                # assess correlation of media similarity and polling
-                ISSUES:
-                    unclear if useful
-                    broken
-                    if kept, needs to be split up
-                    plots either as output or delete code
-                    candidate for deletion
-                input:
-                    # Migration Content from Manifestos
-                        "data/raw/manifestos/manifestos1317_mig.csv"
-                    # Top2Vec model
-                        "models/t2v/migration_mindocs300"
-                    # Media Document Vectors
-                        "data/processed/embeddings/documents.csv"
-                    # main table of documents with topic incidence and association
-                        "data/processed/media/docs_topics_sims.csv"
-                    # reduced topic vectors
-                        "data/processed/embeddings/reduced_topics.csv"
-                    # topic labels
-                        "data/processed/reduced_topic_labels.json"
-                    # polling data
-                        "data/raw/polls/polls.csv"
-                    # party vectors
-                        "data/processed/embeddings/parties_sentences.csv"
-                output:
-                    # manifesto document vectors per sentence
-                        "data/processed/embeddings/parties_sentences.csv"
-                    # manifesto party embeddings (averaged sentence embeddings)
-                        "data/processed/embeddings/parties.csv"
-                    # cosin sim of manifestos to reduced topics
-                        "data/processed/media/docs_party_sims.csv"
-        |___party_frames.py
-                # estimate frame prevalence in party dicts
-                ISSUES:
-                    does not achieve goal
-                    currently no output
-                    candidate for deletion
-                input:
-                    "data/raw/manifestos/manifestos1317_mig.csv"
     |___/estimation
         |___granger.r
                 # Granger causality checks media <-> polls
@@ -112,8 +31,21 @@ Issue ownership theory assumes that the salience of specific issues is always mo
                     # results of granger tests for different aggregation levels
                         "data/processed/media/granger_daily.csv"
                         "data/processed/media/granger_weekly.csv"
+        |___ols.r
+            # estimate simple ols
+                ISSUES:
+                    move data prep in single file to generate weekly estimates of polls, valence, topic and migration salience
+                    outlier removal could be simplified by replacing all -3SD > obs < 3SD
+                input:
+                    # topic estimates
+                        "data/processed/media/docs_topics_sims.csv"
+                    # polls
+                        "data/raw/polls/polls.csv"
+                output:
+                    # OLS Models
+                        "models/ols"
         |___iv.r
-                ## instrument mediterranean coverage with month
+                # instrument mediterranean coverage with month
                 ISSUES:
                     exclusion restriction violated
                     might rerun with data from IOM https://missingmigrants.iom.int/data
@@ -143,6 +75,14 @@ Issue ownership theory assumes that the salience of specific issues is always mo
                     # media and polling data
                         "data/processed/media/merged.csv"
     |___/measurement
+        |___dict_ext.py
+                # embedding extension of dictionaries
+                input:
+                    # 
+                    "data/raw/embeddings/np_embs/np_emb"
+                    "data/raw/dicts/"
+                output:
+                    "data/processed/dicts/"
         |___dicts_count.r
             # count prevalence of dictionaries
             inputs:
@@ -157,7 +97,9 @@ Issue ownership theory assumes that the salience of specific issues is always mo
                     "data/processed/media/full_ests.csv"
     |___/preprocessing
         |___merging.r
-            # mergind polling and topic data
+            # merging polling and topic data
+            ISSUES:
+                output should be moved to output folder
             inputs:
                 # topics
                     "data/processed/media/full_ests.csv"
@@ -168,16 +110,16 @@ Issue ownership theory assumes that the salience of specific issues is always mo
                     "data/processed/media/merged.csv"
         |___news_sampling.r
             ISSUES:
-                drop before handing in
+                DROP before handing in
             # sample for testing
             input:
                 "data/processed/media/news_merged.csv"
             output:
                 "data/processed/media/news_merged_sample.csv"
         |___preprocess_news.R
-            # Fix dates in raw news data
             ISSUES:
-                unclear where output used
+                DROP output not used, code uses output from bert project
+            # Fix dates in raw news data
             input:
                 "data/raw/media/newspapers"
             output:
@@ -187,6 +129,7 @@ Issue ownership theory assumes that the salience of specific issues is always mo
             # plot descriptives of topic distribution
             ISSUES:
                 move valence annotation topic labelling or own file
+                should use final output file
             input:
                 # media data
                     "data/processed/media/docs_topics_sims.csv"
