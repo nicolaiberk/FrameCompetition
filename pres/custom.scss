@@ -1,0 +1,36 @@
+/*-- scss:defaults --*/
+
+// fonts
+$body-bg: #ffffff;
+$link-color: #003366;
+
+/*-- scss:rules --*/
+
+.reveal .slide blockquote {
+  border-left: 3px solid $text-muted;
+  padding-left: 0.5em;
+}
+
+mark {
+  background-color: #003366;
+  color: #ffffff;
+}
+
+.right {
+  text-align: right;
+}
+
+div.callout-ipl.callout {
+  border-left-color: $link-color;
+}
+
+div.callout-ipl.callout-style-default>.callout-header {
+  background-color: $link-color;
+}
+
+.reveal .slide-logo {
+  height: 150px !important;
+  width: 150px!important;
+  max-width: unset !important;
+  max-height: unset !important;
+}

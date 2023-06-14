@@ -1,12 +1,12 @@
 ---
-title: "Does Media Framing Affect Party Performance?"
-subtitle: "Presentation at the Dynamics RTG Colloquium"
+title: "Framing and Voting"
+subtitle: "CompText 2023"
 author: "Nicolai Berk"
 institute: "Humboldt Universität Berlin"
 date: "`r Sys.Date()`"
 date-format: "DD.MM.YYYY"
 logo: vis/dynamics.jpg
-footer: "Nicolai Berk | Media Framing and Party Performance"
+footer: "Nicolai Berk | Framing and Voting"
 format: 
   revealjs:
     theme: [simple, custom.scss]
@@ -15,8 +15,9 @@ editor: visual
 bibliography: "C:/Users/nicol/Dropbox/Studium/BibTex/PhD.bib"
 ---
 
+# How Does Media Content Affect Voting Behaviour?
 
-## Motivation
+## Issue Ownership
 ```{r setup, echo=F, include=F}
 
 library(tidyverse)
@@ -24,30 +25,68 @@ library(dplyr)
 
 ```
 
-![Source: [Pew Research Center](https://www.pewresearch.org/fact-tank/2022/09/08/republicans-and-democrats-have-different-top-priorities-for-u-s-immigration-policy/)](vis/pewRD.png)
+::: {.columns}
+::: {.column width="50%"}
+
+![Source: [Conservatives Website](https://www.conservatives.com/)](vis/conservatives.png)
+
+:::
+::: {.column width="50%"}
+
+![Source: [Labour Website](https://shop.labour.org.uk/category/leaflets)](vis/LabourNHS.png)
+
+:::
+:::
 
 
 ## Emphasis Framing
 
-<br>
+```{r frames, out.width="60%"}
 
-- Voters draw on different <mark>considerations</mark> when evaluating issues.
-- Exposure to different considerations changes attitudes. <font size="5"> [@Nelson1997Rally]</font>
-- Spatial model suggests this should translate into voting behaviour.
-- Party competition research mostly concerned with issue emphasis. <font size="5"> [@GreenPedersen2019]</font>
+library(patchwork)
 
+dta <- 
+  data.frame(
+    id = 1:100,
+    pro_frame = rnorm(10000,  1),
+    con_frame = rnorm(10000, -1)
+  )
+
+p1 <- 
+  dta %>%
+  ggplot(aes(con_frame)) +
+  geom_histogram(fill = "#e3003a") +
+  theme_minimal() +
+  labs(
+    title = "Left-leaning Frame",
+    x = "", y = ""
+  ) +
+  xlim(c(-2, 2))
+
+p2 <- 
+  dta %>%
+  ggplot(aes(pro_frame)) +
+  geom_histogram(fill = "#00b7e9") +
+  theme_minimal() +
+  labs(
+    title = "Right-leaning Frame",
+    x = "Issue Position", y = ""
+  ) +
+  xlim(c(-2, 2))
+
+p1/p2
+
+```
+<!-- 
 ## Contradicting Predictions
 
 <br>
-
-::: columns
-
-::: {.column}
 
 
 ### Issue Ownership
 
 ```{mermaid}
+%%| fig-width: 10
 %%{
   init: {
     'theme': 'base',
@@ -68,11 +107,13 @@ flowchart LR
 
 *All forms of immigration coverage benefit RR*
 
-:::
-::: {.column}
+## Contradicting Predictions
+
+<br>
 
 ### Emphasis Framing
 ```{mermaid}
+%%| fig-width: 10
 %%{
   init: {
     'theme': 'base',
@@ -92,9 +133,8 @@ flowchart LR
 ```
 
 *Pro-Immigration Frames hurt RR*
+ -->
 
-:::
-:::
 
 # Empirical Strategy
 
@@ -102,21 +142,28 @@ flowchart LR
 
 <br>
 
+1. Collect 2.5M News Articles.
+2. Identify migration content with supervised [BERT model](#BERT).
+3. Generate <mark>document embeddings</mark> for migration articles.
+4. Cluster embeddings into topics using `top2vec`.
+
+## BERT Performance
+
+<br>
+
+| Metric | Score |
+| :------------- |  ---- |
+| **Accuracy**       | 0.96  |
+| **Precision**      | 0.94  |
+| **Recall**         | 0.93  |
+| **F1-Score**       | 0.94  |
 
 
-1. Identify migration content with supervised [BERT model](#BERT).
-2. Generate <mark>document embeddings</mark> for migration articles.
-3. Cluster embeddings into topics using `top2vec`.
-4. Annotate based on most similar document and word vectors.
+<!-- ## Validation of Frame Estimates
 
+![Different Crime Measures](../plots/Measures/crime_estimates.png) -->
 
-
-## Validation of Frame Estimates
-
-
-![Different Crime Measures](../plots/Measures/crime_estimates.png)
-
-## Validation Frame Estimates II
+## Validation Frame Estimates
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -135,13 +182,13 @@ flowchart LR
 ## Topic Distribution over Time
 
 ![](../plots/descriptives/topics_descriptives.png)
-
+<!-- 
 ## Measuring Party Preferences
 
 <br><br>
 
 - Current: Aggregated polling from [Politico's PollOfPolls](https://www.politico.eu/europe-poll-of-polls/).
-- Planned: Daily [forsa-Bus](https://search.gesis.org/?source=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%7B%22match_all%22%3A%7B%7D%7D%2C%22filter%22%3A%5B%7B%22term%22%3A%7B%22type%22%3A%22research_data%22%7D%7D%2C%7B%22term%22%3A%7B%22study_group.keyword%22%3A%22Forsa-Bus%22%7D%7D%5D%7D%7D%7D&lang=en) polls of sample of 500 German voters.
+- Planned: Daily [forsa-Bus](https://search.gesis.org/?source=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%7B%22match_all%22%3A%7B%7D%7D%2C%22filter%22%3A%5B%7B%22term%22%3A%7B%22type%22%3A%22research_data%22%7D%7D%2C%7B%22term%22%3A%7B%22study_group.keyword%22%3A%22Forsa-Bus%22%7D%7D%5D%7D%7D%7D&lang=en) polls of sample of 500 German voters. -->
 
 ## Party Performance
 
@@ -163,35 +210,34 @@ Assess <mark>over-time correlation</mark> of frames and party polls.
 
 # Preliminary Results
 
+## Tragedy off Lampedusa: Media Effect
 
-# Regression Discontinuity Design
+![](../plots/RDD/MediaEffect_lampedusa_med.png)
 
+## Tragedy off Lampedusa: Media Effect
 
-## RDD
+![](../plots/RDD/PollEffect_lampedusa.png)
+
+## Parndorf Incident: Media Effect
+
+![](../plots/RDD/MediaEffect_parndorf_ht.png)
+
+## Parndorf Incident: Polling Effect
+
+![](../plots/RDD/PollEffect_parndorf.png)
+
 
 ## VAR
 
 ![](../plots/var/top_topics_weekly.png)
 
 
-# Conclusion
-
-## Preliminary Summary of Results
-
-<br><br>
-
-- Framing *does* affect polling.
-- But unclear how this generalises.
-
 ## Next Steps
 
 <br><br>
 
-- Get better data on dependent variable.
-  - Clear RDD estimate.
-  - Fine-grained VAR.
-- Look for additional events.
-- More validation of topics.
+- Currently waiting for daily opinion polls from [forsa-Bus](https://search.gesis.org/?source=%7B%22query%22%3A%7B%22bool%22%3A%7B%22must%22%3A%7B%22match_all%22%3A%7B%7D%7D%2C%22filter%22%3A%5B%7B%22term%22%3A%7B%22type%22%3A%22research_data%22%7D%7D%2C%7B%22term%22%3A%7B%22study_group.keyword%22%3A%22Forsa-Bus%22%7D%7D%5D%7D%7D%7D&lang=en).
+- Add control variables (esp. immigration numbers).
 
 
 # Thank you!
@@ -207,96 +253,3 @@ This research is generously supported by:
 ![](vis/dfg_logo_englisch_blau_en.jpg)
 
 :::
-
-
-
-# Resources {visibility="uncounted"}
-
-::: {#refs}
-:::
-
-
-
-# Appendix {visibility="uncounted"}
-
-
-## Dictionary Estimates
-
-![](../plots/var/top_dicts_weekly.png)
-
-
-## Why [BERT](https://huggingface.co/docs/transformers/model_doc/bert) {#bert visibility="uncounted"}
-
-<br>
-
-
-- Pre-trained on large language corpus. <font size="5">([Details](https://www.deepset.ai/german-bert))</font> \
-<font color='#801414'>➡ less training data, better performance.</font>
-- Uses **contextual** embeddings. \
-<font color='#801414'>➡ "fish & **chips**" vs "poker **chips**".</font>
-- Outperforms humans on [SQuAD](https://rajpurkar.github.io/SQuAD-explorer/).
-- SOTA in text classification.
-
-<br>
-
-[BACK](#measuring-media-framing)
-
-
-![](vis/bertarch.png){.absolute width=400 bottom=0 right=0}
-
-
-## Dealing with Imbalance {#imbalance visibility="uncounted"}
-
-::: columns
-::: {.column width="70%"}
-
-::: callout-important
-## Imbalance: Little Information in Random Samples
-:::
-
-::: callout-tip
-## Informed Approach
-
-- Generate dictionary related to outcome class.
-- Extend using word embeddings to minimize bias.
-- Count occurences in data.
-- Draw stratified sample for subsequent training.
-
-**Ensures overweighting of minority class.**
-
-:::
-:::
-
-::: {.column width="30%"}
-
-<br>
-
-
-```{r, fig.height=4, fig.width=3}
-
-counts <- 
-  round(rbeta(1000, 0.2, 0.5)* 10, 0) %>%
-  as_tibble() %>% 
-  mutate(sample_id = cut(value, 
-                         c(-Inf, 0.5, 2.5, Inf), 
-                         c(1, 2, 3)),
-         id = 1:n())
-
-counts$sample_T <- rbinom(nrow(counts), 1, 0.05*(counts$value+1))
-
-counts %>% 
-  ggplot(aes(x = value)) +
-  geom_histogram(aes(fill = as.character(sample_T)), bins=3) +
-  scale_fill_manual(values = c("gray", "#003366"),
-                    labels = c("not sampled", "sampled")) +
-  theme(legend.title = element_blank(),
-        legend.position = "bottom") +
-  xlab("# of dict terms in text") + ylab("Observations")
-
-
-```
-
-:::
-:::
-
-[BACK](#mediadata)
