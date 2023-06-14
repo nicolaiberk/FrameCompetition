@@ -6,7 +6,7 @@ var_topic <-
         controls = NA,
         max_lag = 12,
         topic_metric = "association",
-        aggregation = "ym") {
+        aggregation = "date") {
 
     ## load data
     merged <- data.table::fread("data/processed/media/merged.csv")
@@ -15,9 +15,9 @@ var_topic <-
     merged_agg <-
         merged %>%
         mutate(
-            yw = paste(year, week(date), sep = "-"),
-            ym = paste(year, month(date), sep = "-"),
-            yq = paste(year, quarter(date), sep = "-")
+            yw = floor_date(date, "week"),
+            ym = floor_date(date, "month"),
+            yq = floor_date(date, "quarter")
         ) %>%
         group_by(.data[[aggregation]]) %>%
         summarize(
@@ -41,6 +41,7 @@ var_topic <-
         str_replace(colnames(merged_agg), "\\(ot\\)", "ot")
 
     ## define topic metric
+    # consider moving average for frame prevalence to deal with noisiness
     if(topic_metric == "association") {
         if (grepl(topic, pattern = "\\bot\\s")) {
             topic_var <- str_replace(topic, "\\bot", "ot\\:")
@@ -49,6 +50,7 @@ var_topic <-
             topic_var <- paste0("Association (reduced): ", topic)
         }
     }else{
+        # consider logging count
         topic_var <- topic
     }
 
@@ -64,21 +66,9 @@ var_topic <-
     ## interpolate missing values
     merged_agg[party] <- zoo::na.approx(merged_agg[party])
 
-    ## filter missings
-    merged_agg <-
-        merged_agg[min((seq_len(nrow(merged_agg)))[!is.na(merged_agg[[party]])]):max((1:nrow(merged_agg))[!is.na(merged_agg[[party]])]),] # drop front and end missing values
-
-    ## interpolate missing values
-    merged_agg[party] <- zoo::na.approx(merged_agg[party])
-
     ## define control variables
     if (!is.na(controls)) {
-        if (controls == "ywd") {
-            control_vars  <- c("year", "week", "wday")
-            control_merged_agg <- merged_agg[, c(control_vars)]
-        } else {
-            stop(paste("Unknown control variables:", controls, "."))
-        }
+        control_merged_agg <- merged_agg[, controls]
     }else{
         control_merged_agg <- as.null()
     }
@@ -93,7 +83,7 @@ var_topic <-
     
     ## run var
     m <- do.call(vars::VAR, args)
-    ifun <- vars::irf(m, cum = T)
+    ifun <- vars::irf(m, cum = T, n.ahead = m$p, n.boot = 1000)
 
     ## return results
 
@@ -101,14 +91,14 @@ var_topic <-
     topic_irf <- str_replace_all(topic_var, "[\\(\\)\\:\\s\\,\\-\\'\\&]", ".")
 
     # get estimate according to chosen lag
-    point_iv_party <- ifun$irf[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
-    lower_iv_party <- ifun$Lower[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
-    upper_iv_party <- ifun$Upper[[party]][[min(m$p, nrow(ifun$irf[[party]])), topic_irf]]
+    point_iv_party <- ifun$irf[[party]][[nrow(ifun$irf[[party]]), topic_irf]]
+    lower_iv_party <- ifun$Lower[[party]][[nrow(ifun$irf[[party]]), topic_irf]]
+    upper_iv_party <- ifun$Upper[[party]][[nrow(ifun$irf[[party]]), topic_irf]]
 
 
-    point_iv_topic <- ifun$irf[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
-    lower_iv_topic <- ifun$Lower[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
-    upper_iv_topic <- ifun$Upper[[topic_irf]][[min(m$p, nrow(ifun$irf[[topic_irf]])), party]]
+    point_iv_topic <- ifun$irf[[topic_irf]][[nrow(ifun$irf[[topic_irf]]), party]]
+    lower_iv_topic <- ifun$Lower[[topic_irf]][[nrow(ifun$irf[[topic_irf]]), party]]
+    upper_iv_topic <- ifun$Upper[[topic_irf]][[nrow(ifun$irf[[topic_irf]]), party]]
 
 
     return(
