@@ -8,11 +8,11 @@ import random
 random.seed(42)
 
 ## load manifestos
-migmps = pd.read_csv("data/raw/manifestos/manifestos1317_mig.csv")
+migmps = pd.read_csv("../../data/raw/manifestos/manifestos1317_mig.csv")
 
 #%% generate embeddings
 ## load top2vec model
-model = Top2Vec.load("models/t2v/migration_mindocs300")
+model = Top2Vec.load("../../models/t2v/migration_mindocs300")
 
 ## add party documents to generate embeddings
 model.add_documents(migmps["text"].tolist())
@@ -26,7 +26,7 @@ party_vecs = pd.DataFrame(party_vecs)
 party_vecs = pd.concat([migmps, party_vecs], axis=1)
 
 ## save party vectors (sentence embeddings)
-party_vecs.to_csv("data/processed/embeddings/parties_sentences.csv", index=False)
+party_vecs.to_csv("../../data/processed/embeddings/parties_sentences.csv", index=False)
 
 #%% average party vectors
 vars = [i for i in range(300)]
@@ -34,12 +34,12 @@ vars.append("party")
 party_vecs = party_vecs[vars].groupby("party").mean().reset_index()
 
 ## save party vectors (average of sentence embeddings)
-party_vecs.to_csv("data/processed/embeddings/parties.csv", index=False)
+party_vecs.to_csv("../../data/processed/embeddings/parties.csv", index=False)
 
 #%% estimate similarity to doc vecs
 
 ## load doc vecs
-doc_vecs = pd.read_csv("data/processed/embeddings/documents.csv")
+doc_vecs = pd.read_csv("../../data/processed/embeddings/documents.csv")
 
 ## estimate cosin sim to reduced topics
 from scipy.spatial import distance
@@ -51,7 +51,7 @@ cos_sim = pd.DataFrame(cos_sim)
 cos_sim.columns = party_vecs["party"].tolist()
 
 ## load meta data
-meta = pd.read_csv("data/processed/media/docs_topics_sims.csv")
+meta = pd.read_csv("../../data/processed/media/docs_topics_sims.csv")
 meta = meta[['paper', 'title', 'url', 'crime', 'crime_label', 'crime_prob',
                 'label_prob', 'dpa', 'date_clean', 'topic_id', 'reduced_topic_id',
                 'topic_label', 'reduced_topic_label']]
@@ -59,7 +59,7 @@ meta = meta[['paper', 'title', 'url', 'crime', 'crime_label', 'crime_prob',
 meta = pd.concat([meta, cos_sim], axis=1)
 
 ## save
-meta.to_csv("data/processed/media/docs_party_sims.csv", index=False)
+meta.to_csv("../../data/processed/media/docs_party_sims.csv", index=False)
 
 #%% visualise party similarity across time
 meta[['date_clean', '90/Greens', 'AfD', 
@@ -70,7 +70,7 @@ meta[['date_clean', '90/Greens', 'AfD',
 #%% visualise party and topic vecs in 2D
 
 ## load reduced topic vectors
-top_vecs = pd.read_csv("data/processed/embeddings/reduced_topics.csv")
+top_vecs = pd.read_csv("../../data/processed/embeddings/reduced_topics.csv")
 
 ## label topics
 import json
@@ -109,7 +109,7 @@ plt.show()
 
 # %%
 
-polls = pd.read_csv("data/raw/polls/polls.csv")
+polls = pd.read_csv("../../data/raw/polls/polls.csv")
 
 ## aggregate monthly polls
 polls = polls.pivot(columns='party', values='value',
@@ -146,11 +146,11 @@ print(merged[['GRUENE', '90/Greens']].corr()) # very weak negative
 ## plot topics vs party document sample
 
 ## load party vectors
-party_vecs = pd.read_csv("data/processed/embeddings/parties_sentences.csv"
+party_vecs = pd.read_csv("../../data/processed/embeddings/parties_sentences.csv"
                          ).sample(100).drop(['date', 'code', 'text'], axis = 1)
 
 ## load topic vectors
-top_vecs = pd.read_csv("data/processed/embeddings/reduced_topics.csv")
+top_vecs = pd.read_csv("../../data/processed/embeddings/reduced_topics.csv")
 top_vecs["party"] = ""
 
 # %%
@@ -177,7 +177,7 @@ plt.show()
 ## estimate party embedings from entire manifesto content on immigration (should be fine, limit is 10k tokens: https://github.com/RaRe-Technologies/gensim/issues/2880)
 
 ## load manifestos
-migmps = pd.read_csv("data/raw/manifestos/manifestos1317_mig.csv")
+migmps = pd.read_csv("../../data/raw/manifestos/manifestos1317_mig.csv")
 
 ## concatenate manifesto texts
 migmps_con = migmps.drop(['date', 'code'], axis = 1).groupby('party').agg(lambda x: ' '.join(x))
@@ -223,7 +223,7 @@ plt.show()
 
 
 ## load doc vecs
-doc_vecs = pd.read_csv("data/processed/embeddings/documents.csv")
+doc_vecs = pd.read_csv("../../data/processed/embeddings/documents.csv")
 
 ## estimate cosin sim to reduced topics
 from scipy.spatial import distance
@@ -234,7 +234,7 @@ cos_sim = pd.DataFrame(cos_sim)
 cos_sim.columns = party_vecs["party"].tolist()
 
 ## load meta data
-meta = pd.read_csv("data/processed/media/docs_topics_sims.csv")
+meta = pd.read_csv("../../data/processed/media/docs_topics_sims.csv")
 meta = meta[['paper', 'title', 'url', 'crime', 'crime_label', 'crime_prob',
                 'label_prob', 'dpa', 'date_clean', 'topic_id', 'reduced_topic_id',
                 'topic_label', 'reduced_topic_label']]
@@ -250,7 +250,7 @@ meta[['date_clean', '90/Greens', 'AfD',
 
 #%% correlate with polls
 
-polls = pd.read_csv("data/raw/polls/polls.csv")
+polls = pd.read_csv("../../data/raw/polls/polls.csv")
 
 ## aggregate monthly polls
 polls = polls.pivot(columns='party', values='value',
@@ -332,7 +332,7 @@ plt.show()
 #%% generate cmp code embeddings
 
 ## load manifestos
-migmps = pd.read_csv("data/raw/manifestos/manifestos1317_mig.csv")
+migmps = pd.read_csv("../../data/raw/manifestos/manifestos1317_mig.csv")
 
 ## concatenate manifesto texts
 migmps_con = migmps.drop(['date', 'party'], axis = 1).groupby('code').agg(lambda x: ' '.join(x))
@@ -376,7 +376,7 @@ plt.show()
 ## cos similarity
 
 ## load doc vecs
-doc_vecs = pd.read_csv("data/processed/embeddings/documents.csv")
+doc_vecs = pd.read_csv("../../data/processed/embeddings/documents.csv")
 
 ## estimate cosin sim to reduced topics
 from scipy.spatial import distance
@@ -387,7 +387,7 @@ cos_sim = pd.DataFrame(cos_sim)
 cos_sim.columns = [str(c) for c in code_vecs["code"].tolist()]
 
 ## load meta data
-meta = pd.read_csv("data/processed/media/docs_topics_sims.csv")
+meta = pd.read_csv("../../data/processed/media/docs_topics_sims.csv")
 meta = meta[['paper', 'title', 'url', 'crime', 'crime_label', 'crime_prob',
                 'label_prob', 'dpa', 'date_clean', 'topic_id', 'reduced_topic_id',
                 'topic_label', 'reduced_topic_label']]
