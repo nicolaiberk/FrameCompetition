@@ -20,16 +20,18 @@ polls_tidy <-
 
 ## plot
 plt <- polls_tidy %>%
+    filter(party != "PIRATEN") %>%
     ggplot(aes(x = date, y = value, color = party)) +
     geom_point(alpha = 0.025) +
     geom_smooth() +
     facet_wrap(~party) +
     scale_color_manual(values = 
-                        c("lightblue", "yellow", "green",
-                        "purple", "orange", "red", "blue")) +
+                        c("lightblue", "magenta", "green",
+                        "darkred", "red", "black")) +
+    guides(color = FALSE) +
     theme_minimal()
 
-png("plots/polls.png", width = 10, height = 8, units = "in", res = 300)
+png("plots/descriptives/polls.png", width = 10, height = 8, units = "in", res = 300)
 plt
 dev.off()
 
