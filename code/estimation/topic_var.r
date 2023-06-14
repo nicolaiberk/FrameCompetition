@@ -42,17 +42,17 @@ var_results <-
         ## inputs
         topic = topics,
         party = parties,
-        controls = NA,
-        aggregation = c("yw", "ym", "yq"),
+        controls = c("mig_sal", NA),
+        aggregation = c("yw"),
         
         ## outputs
-        point_party_dv = NA,
-        lower_party_dv = NA,
-        upper_party_dv = NA,
+        point_party_iv = NA,
+        lower_party_iv = NA,
+        upper_party_iv = NA,
         
-        point_topic_dv = NA,
-        lower_topic_dv = NA,
-        upper_topic_dv = NA,
+        point_topic_iv = NA,
+        lower_topic_iv = NA,
+        upper_topic_iv = NA,
 
         stringsAsFactors = F
     ) %>%
@@ -67,7 +67,7 @@ var_results <-
         topic_metric = 
             case_when(
                 grepl(topic, pattern = "ext_") ~ "absolute",
-                !grepl(topic, pattern = "ext_") ~ "association",
+                !grepl(topic, pattern = "ext_") ~ "share",
             )
     )
 
@@ -96,4 +96,4 @@ for (i in seq_len(nrow(var_results))) {
 
 
 ## save results
-write.csv(var_results, "data/processed/estimation/var_results.csv", row.names = F)
+write.csv(var_results, "data/processed/estimation/var_results_weekly.csv", row.names = F)
